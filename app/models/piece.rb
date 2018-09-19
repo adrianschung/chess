@@ -3,7 +3,15 @@ class Piece < ApplicationRecord
   belongs_to :player
 
   def move_to!(new_square)
-    Pieces::MoveTo.call(self, new_square) if valid_move?(new_square)
+    self.transaction do
+      if valid_move?(new_square)
+        Pieces::MoveTo.call(self, new_square)
+        Games::UpdateState.call(game)
+      end
+      if self.game.check?(self.player)
+        fail ActiveRecord::Rollback
+      end
+    end
   end
 
   def color
@@ -23,5 +31,21 @@ class Piece < ApplicationRecord
 
   def valid_movement?(max, min, new_pos)
     (new_pos <= max) && (new_pos >= min)
+  end
+
+  def opponent_king
+    @opponent_king = game.pieces.where(type: 'King').where.not(player: self.player).first
+  end
+
+  def opponent_pieces
+    @opponent_pieces = game.pieces.where.not(player: self.player, captured: false)
+  end
+
+  def can_capture?
+    capture_square = { row: self.row, column: self.column }
+    opponent_pieces.each do |piece|
+      return true if piece.valid_move?(capture_square)
+    end
+    false
   end
 end
