@@ -13,7 +13,7 @@ module Pieces
     def call
       return horizontal_obstruction if current_row == new_row
       return vertical_obstruction if current_column == new_column
-      return diagnol_obstruction if (current_column - new_column).abs == (current_row - new_row).abs
+      return diagonal_obstruction if (current_column - new_column).abs == (current_row - new_row).abs
       nil
     end
 
@@ -51,7 +51,7 @@ module Pieces
       false
     end
 
-    def diagnol_obstruction
+    def diagonal_obstruction
       # diagonal going down and right or going up and going left
       if down_right == true
         (row_start...row_end).each do |row|

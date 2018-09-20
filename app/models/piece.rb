@@ -18,6 +18,14 @@ class Piece < ApplicationRecord
     Pieces::Color.call(self)
   end
 
+  def opponent_king
+    @opponent_king = game.pieces.where(type: 'King').where.not(player: self.player).first
+  end
+
+  def opponent_pieces
+    @opponent_pieces = game.pieces.where.not(player: self.player, captured: false)
+  end
+
   protected
 
   def valid_move?(new_square)
@@ -33,19 +41,16 @@ class Piece < ApplicationRecord
     (new_pos <= max) && (new_pos >= min)
   end
 
-  def opponent_king
-    @opponent_king = game.pieces.where(type: 'King').where.not(player: self.player).first
-  end
-
-  def opponent_pieces
-    @opponent_pieces = game.pieces.where.not(player: self.player, captured: false)
-  end
-
   def can_capture?
     capture_square = { row: self.row, column: self.column }
-    opponent_pieces.each do |piece|
+    piece.opponent_pieces.each do |piece|
       return true if piece.valid_move?(capture_square)
     end
     false
   end
+
+  def can_obstruct?
+    Pieces::CheckObstruction.call(self, { row: opponent_king.row, column: opponent_king.column })
+  end
+
 end
