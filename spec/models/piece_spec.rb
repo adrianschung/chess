@@ -67,8 +67,7 @@ RSpec.describe Piece, type: :model do
       game = FactoryBot.create(:game, white_player: player1, black_player: player2)
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
       piece_end = FactoryBot.create(:piece, game: game, column: 3, row: 3, player: player1)
-      move = piece_start.move_to!(row: piece_end.row, column: piece_end.column)
-      expect(move).to eq(false)
+      piece_start.move_to!(row: piece_end.row, column: piece_end.column)
       expect(piece_start.column).to eq(1)
       expect(piece_start.row).to eq(1)
       expect(piece_end.captured).to eq(false)
@@ -80,9 +79,7 @@ RSpec.describe Piece, type: :model do
       game = FactoryBot.create(:game, white_player: player1, black_player: player2)
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
       piece_end = FactoryBot.create(:piece, game: game, column: 3, row: 3, player: player2)
-
-      move = piece_start.move_to!(row: piece_end.row, column: piece_end.column)
-      expect(move).to eq(true)
+      piece_start.move_to!(row: piece_end.row, column: piece_end.column)
       expect(piece_start.column).to eq(piece_end.column)
       expect(piece_start.row).to eq(piece_end.row)
       piece_end.reload
@@ -94,8 +91,7 @@ RSpec.describe Piece, type: :model do
       player2 = FactoryBot.create(:player, playername: 'Ricky')
       game = FactoryBot.create(:game, white_player: player1, black_player: player2)
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
-      move = piece_start.move_to!(row: 2, column: 2)
-      expect(move).to eq(true)
+      piece_start.move_to!(row: 2, column: 2)
       expect(piece_start.column).to eq(2)
       expect(piece_start.row).to eq(2)
     end
@@ -106,8 +102,7 @@ RSpec.describe Piece, type: :model do
       game = FactoryBot.create(:game, white_player: player1, black_player: player2)
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
       FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1)
-      move = piece_start.move_to!(row: 2, column: 2)
-      expect(move).to eq(false)
+      piece_start.move_to!(row: 2, column: 2)
       expect(piece_start[:column]).to eq(1)
       expect(piece_start[:row]).to eq(1)
     end

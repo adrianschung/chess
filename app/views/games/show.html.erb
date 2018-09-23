@@ -11,8 +11,8 @@
 		</section>
 
 		<h1 id='game_state'><%= @game.state %></h1>
-<!--
-		<h3>Speical Moves</h3>
+
+		<h3>Special Moves</h3>
 		<%= button_tag "Castle Queenside",
 			class: 'castle',
 			data: {
@@ -26,7 +26,9 @@
 				url: game_castle_path(@game),
 				direction: 'kingside'
 			}
-		%> -->
+		%>
+		<br />
+		<br />
 
 			<table class='chessboard'>
 				<% @chess_board.each_with_index do |row, y| %>

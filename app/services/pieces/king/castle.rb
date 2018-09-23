@@ -19,6 +19,7 @@ module Pieces
         return if direction != 'kingside' && direction != 'queenside'
         king.update_attributes(column: castle_king_column)
         rook.update_attributes(column: castle_rook_column)
+        Games::UpdateState.call(@game)
       end
 
       private

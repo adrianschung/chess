@@ -5,7 +5,6 @@ class SpecialMovesController < ApplicationController
     player = get_player(@game)
     king = @game.pieces.where(type: 'King').find_by(player: player)
     Pieces::King::Castle.call(king, params[:direction])
-    Games::UpdateState.call(@game)
     redirect_to game_path(@game)
   end
 

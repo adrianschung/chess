@@ -9,8 +9,7 @@ module Pieces
     def call
       return check_horizontal_squares if piece.row == opponent_king.row
       return check_vertical_squares if piece.column == opponent_king.column
-      return check_diagonal_squares if (piece.row - opponent_king.row).abs ==
-                                       (piece.column - opponent_king.column).abs
+      return check_diagonal_squares if (piece.row - opponent_king.row).abs == (piece.column - opponent_king.column).abs
     end
 
     private
@@ -55,7 +54,7 @@ module Pieces
         end
       elsif moving_up?
         for x in (piece.column + 1)...opponent_piece.column
-          for y in for y in (opponent_king.row + 1)...piece.row
+          for y in (opponent_king.row + 1)...piece.row
             obstructable_squares.push([y, x])
           end
         end
@@ -95,8 +94,8 @@ module Pieces
     def valid_obstruction?(squares)
       squares.each do |square|
         new_square = { row: square[0], column: square[1] }
-        opponent_pieces.each do |piece|
-          return true if piece.valid_move?(new_square)
+        opponent_pieces.each do |opponent_piece|
+          return true if opponent_piece.valid_move?(new_square)
         end
       end
       false
