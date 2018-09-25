@@ -28,7 +28,7 @@ class Player < ApplicationRecord
   end
 
   def total_games
-    games_won + games_lost
+    games_won + games_lost + games_in_progress + games_drawn
   end
 
   def self.from_omniauth(auth)
