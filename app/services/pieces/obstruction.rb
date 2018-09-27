@@ -13,7 +13,8 @@ module Pieces
     def call
       return horizontal_obstruction if current_row == new_row
       return vertical_obstruction if current_column == new_column
-      return diagonal_obstruction if (current_column - new_column).abs == (current_row - new_row).abs
+      return diagonal_obstruction if (current_column - new_column).abs ==
+                                     (current_row - new_row).abs
       nil
     end
 

@@ -7,7 +7,7 @@ Capybara.default_max_wait_time = 10
 describe 'A player creates a game', feature: true, js: true do
   scenario 'A player creates a game with a valid user' do
     player = FactoryBot.create(:player, playername: 'Wayne')
-    game = FactoryBot.create(:game, white_player: player)
+    FactoryBot.create(:game, white_player: player)
     sign_in(player)
 
     find('#create_game_dropdown').click
@@ -17,6 +17,5 @@ describe 'A player creates a game', feature: true, js: true do
     expect(page).to have_content('game123')
 
     find('#my_games_dropdown').click
-    save_and_open_screenshot
   end
 end

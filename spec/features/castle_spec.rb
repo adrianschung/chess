@@ -1,7 +1,6 @@
 require 'rails_helper'
 require 'support/sign_in'
-
-#describe 'castle the king' do
+# describe 'castle the king' do
 #  scenario 'white player queenside' do
 #    white_player = FactoryBot.create(:player, playername: 'Carl')
 #    black_player = FactoryBot.create(:player, playername: 'Steve')
@@ -108,4 +107,4 @@ require 'support/sign_in'
   #                                    row: 7,
   #                                    column: 4)
   # end
-#end
+# end

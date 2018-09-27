@@ -12,5 +12,4 @@ class Bishop < Piece
       valid_movement?(7, -7, new_square[:row] - row) &&
       valid_movement?(7, -7, new_square[:column] - column)
   end
-
 end

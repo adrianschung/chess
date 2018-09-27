@@ -18,7 +18,7 @@ class Pawn < Piece
   end
 
   def move_to!(new_square)
-    self.transaction do
+    transaction do
       if valid_move?(new_square)
         Pieces::MoveTo.call(self, new_square)
       elsif valid_en_passant_move?(new_square)

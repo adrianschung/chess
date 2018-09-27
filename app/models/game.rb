@@ -37,12 +37,12 @@ class Game < ApplicationRecord
   end
 
   def checkmate?(player)
-    return false if self.check?(player) == false
+    return false if check?(player) == false
     king = pieces.where(player: player, type: 'King', captured: false).first
     opponent_pieces = pieces.where.not(player: player, captured: true)
     check_piece = nil
     opponent_pieces.each do |piece|
-      check_piece = piece if piece.valid_move?(row:king.row, column:king.column)
+      check_piece = piece if piece.valid_move?(row: king.row, column: king.column)
     end
     return false if check_piece.can_obstruct? || check_piece.can_capture?
     king_move = {}
@@ -53,6 +53,10 @@ class Game < ApplicationRecord
         return false if king.valid_move?(king_move)
       end
     end
-    true
+    checkmate(player)
+  end
+
+  def checkmate(player)
+    player == white_player ? game.update(state: 3) : game.update(state: 4)
   end
 end

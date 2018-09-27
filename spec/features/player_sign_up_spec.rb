@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'support/omniauth'
 
-#feature 'Visitor signs up with social media authentication' do
+# feature 'Visitor signs up with social media authentication' do
 #  scenario 'visitor signs up with facebook' do
 #    visit '/'
 #    expect(page).to have_link('Sign in with Facebook')
@@ -17,4 +17,4 @@ require 'support/omniauth'
 #    click_link('Log in with Google')
 #    expect(page).to have_link('Sign Out')
 #  end
-#end
+# end
