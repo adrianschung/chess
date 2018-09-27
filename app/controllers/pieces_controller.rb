@@ -7,6 +7,9 @@ class PiecesController < ApplicationController
     current_piece.move_to!(new_square_params)
     flash[:notice] = "#{game.white_player.playername} is in check" if game.check?(game.white_player)
     flash[:notice] = "#{game.black_player.playername} is in check" if game.check?(game.black_player)
+    game.update(state: 3) if game.check? && game.checkmate?(white_player)
+    game.update(state: 4) if game.check? && game.checkmate?(black_player)
+
     redirect_to game_path(game)
   end
 
