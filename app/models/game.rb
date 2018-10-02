@@ -1,4 +1,5 @@
 class Game < ApplicationRecord
+  include KingMove
   validates :white_player, presence: true
 
   belongs_to :white_player, class_name: :Player
@@ -45,14 +46,7 @@ class Game < ApplicationRecord
       check_piece = piece if piece.valid_move?(row: king.row, column: king.column)
     end
     return false if check_piece.can_obstruct? || check_piece.can_capture?
-    king_move = {}
-    (-1..1).each do |x|
-      (-1..1).each do |y|
-        king_move[:row] = x
-        king_move[:column] = y
-        return false if king.valid_move?(king_move)
-      end
-    end
+    return false if king_can_move?(king)
     checkmate(player)
   end
 
