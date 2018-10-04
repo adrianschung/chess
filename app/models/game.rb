@@ -53,4 +53,7 @@ class Game < ApplicationRecord
   def checkmate(player)
     player == white_player ? game.update(state: 3) : game.update(state: 4)
   end
+
+  def stalemate(player)
+    
 end

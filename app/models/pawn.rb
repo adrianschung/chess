@@ -82,5 +82,9 @@ class Pawn < Piece
     game.white_player_id == player.id
   end
 
+  def promotion?
+    white_player? && new_square == 7 || new_square == 0
+  end
+
   attr_accessor :new_square, :new_row, :new_col
 end
