@@ -4,6 +4,7 @@ class Player < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook google_oauth2]
+  mount_uploader :avatar, AvatarUploader
 
   def games
     Game.where(white_player_id: self).or(Game.where(black_player_id: self))

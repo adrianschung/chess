@@ -73,3 +73,5 @@ gem 'omniauth-google-oauth2'
 
 gem 'simple_form'
 gem 'jquery-ui-rails'
+gem 'carrierwave', '~> 1.0'
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?

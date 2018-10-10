@@ -6,4 +6,10 @@ class PlayersController < ApplicationController
   def myprofile
     @player = current_player
   end
+
+  private
+
+  def user_params
+    params.permit(:avatar)
+  end
 end
