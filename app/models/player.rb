@@ -11,17 +11,17 @@ class Player < ApplicationRecord
   end
 
   def games_in_progress
-    games.where(state: [0, 1, 2])
+    games.where(state: [0, 1, 2]).count
   end
 
   def games_won
-    Game.where(white_player_id: self, state: 4)
-        .or(Game.where(black_player_id: self, state: 3)).count
+    games.where(white_player_id: self, state: 4)
+        .or(games.where(black_player_id: self, state: 3)).count
   end
 
   def games_lost
-    Game.where(white_player_id: self, state: 3)
-        .or(Game.where(black_player_id: self, state: 4)).count
+    games.where(white_player_id: self, state: 3)
+        .or(games.where(black_player_id: self, state: 4)).count
   end
 
   def games_drawn

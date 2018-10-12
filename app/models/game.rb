@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-  include KingMove
+#  include KingMove
   validates :white_player, presence: true
 
   belongs_to :white_player, class_name: :Player
@@ -55,5 +55,6 @@ class Game < ApplicationRecord
   end
 
   def stalemate(player)
+  end
     
 end
