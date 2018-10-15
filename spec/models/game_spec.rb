@@ -96,7 +96,7 @@ RSpec.describe Game, type: :model do
       expect(game.checkmate?(white_player)).to eq(true)
     end
 
-    it 'will determine if piece causing check can be blocked' do
+    it 'will determine if piece causing check can be blocked horizontally' do
       white_player = FactoryBot.create(:player)
       black_player = FactoryBot.create(:player)
       game = FactoryBot.create(:game, state: 1, white_player: white_player,
@@ -107,8 +107,34 @@ RSpec.describe Game, type: :model do
                                 type: 'Rook', game: game)
       FactoryBot.create(:piece, player: black_player, row: 0, column: 7,
                                 type: 'Rook', game: game)
-      FactoryBot.create(:piece, player: black_player, row: 1, column: 7,
+      expect(game.checkmate?(white_player)).to eq(false)
+    end
+
+    it 'will determine if a piece causing check can be blocked vertically' do
+      white_player = FactoryBot.create(:player)
+      black_player = FactoryBot.create(:player)
+      game = FactoryBot.create(:game, state: 1, white_player: white_player,
+                                      black_player: black_player)
+      FactoryBot.create(:piece, player: white_player, row: 0, column: 0, type: 'King',
+                                game: game)
+      FactoryBot.create(:piece, player: white_player, row: 1, column: 1,
                                 type: 'Rook', game: game)
+      FactoryBot.create(:piece, player: black_player, row: 7, column: 0,
+                                type: 'Rook', game: game)
+      expect(game.checkmate?(white_player)).to eq(false)
+    end
+
+    it' will determine if a piece causing check can be blocked diagonally' do
+      white_player = FactoryBot.create(:player)
+      black_player = FactoryBot.create(:player)
+      game = FactoryBot.create(:game, state: 1, white_player: white_player,
+                                      black_player: black_player)
+      FactoryBot.create(:piece, player: white_player, row: 0, column: 0, type: 'King',
+                                game: game)
+      FactoryBot.create(:piece, player: white_player, row: 0, column: 7,
+                                type: 'Rook', game: game)
+      FactoryBot.create(:piece, player: black_player, row: 7, column: 7,
+                                type: 'Bishop', game: game)
       expect(game.checkmate?(white_player)).to eq(false)
     end
   end
