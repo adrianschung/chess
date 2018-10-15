@@ -46,12 +46,12 @@ class Game < ApplicationRecord
       check_piece = piece if piece.valid_move?(row: king.row, column: king.column)
     end
     return false if check_piece.can_obstruct? || check_piece.can_capture?
-    return false if king_can_move?(king)
+#    return false if king_can_move?(king)
     checkmate(player)
   end
 
   def checkmate(player)
-    player == white_player ? game.update(state: 3) : game.update(state: 4)
+    player == white_player ? self.update(state: 3) : self.update(state: 4)
   end
 
   def stalemate(player)

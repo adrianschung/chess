@@ -29,7 +29,7 @@ class Piece < ApplicationRecord
   end
 
   def opponent_pieces
-    @opponent_pieces = game.pieces.where.not(player: player, captured: false)
+    @opponent_pieces = game.pieces.where.not(player: player, captured: true)
   end
 
   def opponent_king

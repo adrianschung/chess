@@ -73,7 +73,7 @@ module Pieces
     end
 
     def opponent_pieces
-      piece.opponent_pieces
+       opponent_pieces = game.pieces.where.not(player: piece.player, captured: true, type: 'King')
     end
 
     def valid_obstruction?(squares)
