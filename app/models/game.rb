@@ -48,6 +48,9 @@ class Game < ApplicationRecord
   end
 
   def stalemate(player)
+    return false if check?(player)
+    return false if !endgame?(player)
+    self.update(state: 5)
   end
 
   def endgame?(player)
