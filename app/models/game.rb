@@ -38,7 +38,7 @@ class Game < ApplicationRecord
   end
 
   def checkmate?(player)
-    return false if check?(player) == false
+    return false !if check?(player)
     king = pieces.where(player: player, type: 'King', captured: false).first
     opponent_pieces = pieces.where.not(player: player, captured: true)
     check_piece = nil
