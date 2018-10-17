@@ -38,15 +38,8 @@ class Game < ApplicationRecord
   end
 
   def checkmate?(player)
-    return false !if check?(player)
-    king = pieces.where(player: player, type: 'King', captured: false).first
-    opponent_pieces = pieces.where.not(player: player, captured: true)
-    check_piece = nil
-    opponent_pieces.each do |piece|
-      check_piece = piece if piece.valid_move?(row: king.row, column: king.column)
-    end
-    return false if check_piece.can_obstruct? || check_piece.can_capture?
-#    return false if king_can_move?(king)
+    return false if !check?(player)
+    return false if !endgame?(player)
     checkmate(player)
   end
 
@@ -56,5 +49,16 @@ class Game < ApplicationRecord
 
   def stalemate(player)
   end
-    
+
+  def endgame?(player)
+    king = pieces.where(player: player, type: 'King', captured: false).first
+    opponent_pieces = pieces.where.not(player: player, captured: true)
+    check_piece = nil
+    opponent_pieces.each do |piece|
+      check_piece = piece if piece.valid_move?(row: king.row, column: king.column)
+    end
+    return false if check_piece.can_obstruct? || check_piece.can_capture?
+#    return false if king.can_move?
+    true
+  end
 end
