@@ -5,6 +5,4 @@ Rails.application.routes.draw do
     put '/castle' => 'special_moves#castle'
   end
   resources :pieces, only: :update
-  resources :players, only: :show
-  get 'myprofile' => 'users#myprofile'
 end

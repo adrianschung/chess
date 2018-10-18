@@ -1,4 +1,4 @@
-class PlayersController < ApplicationController
+class UsersController < ApplicationController
   def show
     @player = Player.find(params[:id])
   end
