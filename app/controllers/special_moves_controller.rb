@@ -36,7 +36,7 @@ class SpecialMovesController < ApplicationController
   end
 
   def pawn
-    pawn = game_pieces.where(row: 7).or(game_pieces.where(row: 0).where(type: 'Pawn')
+    pawn = game_pieces.where(row: 7).or(game_pieces.where(row: 0).where(type: 'Pawn'))
   end
 
   def get_player(game)
