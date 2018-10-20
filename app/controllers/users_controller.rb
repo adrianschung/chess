@@ -3,10 +3,6 @@ class UsersController < ApplicationController
     @player = Player.find(params[:id])
   end
 
-  def myprofile
-    @player = current_player
-  end
-
   private
 
   def user_params
