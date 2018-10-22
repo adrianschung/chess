@@ -3,4 +3,13 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(*)
     games_path
   end
+
+  private
+
+  def valid_player
+    unless current_user == @game.white_player || current_user == @game.black_player
+      flash[:error] = "You are not participating in this game"
+      redirect_to games_path
+    end
+  end
 end

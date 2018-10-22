@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_player!
+  before_action :valid_player, only: [:show, :update]
   helper_method :current_game
   helper_method :render_piece
 
