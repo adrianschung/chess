@@ -1,0 +1,7 @@
+<div class="player-edit">
+  <h2>Add profile picture</h2>
+    <%= simple_form_for current_player do |f| %>
+      <%= f.input :avatar %>
+      <%= f.submit "Add Avatar", class: 'btn btn-primary' %>
+    <% end %>
+</div>
