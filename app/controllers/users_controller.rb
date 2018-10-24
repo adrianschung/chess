@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    current_player.update_attributes(user_params)
   end
 
   private
