@@ -2,6 +2,8 @@
   <h2><%= current_player.playername %></h2>
   <%= image_tag(current_user.avatar) %>
   <p>Last active: <%= current_player.last_sign_in_at.strftime("%b %d, %Y") %></p>
+  <p>Age: <%= current_player.age %> years</p>
+  <p>Location: <%= current_player.country %></p>
   <h3><span>Games won:</span> <%= current_player.games_won %></h3>
   <h3><span>Games lost:</span> <%= current_player.games_lost %></h3>
   <h3><span>Games tied:</span> <%= current_player.games_drawn %></h3>

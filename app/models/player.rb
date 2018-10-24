@@ -5,6 +5,7 @@ class Player < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook google_oauth2]
   mount_uploader :avatar, AvatarUploader
+  attribute :country, :string, default: "N/A"
 
   def games
     Game.where(white_player_id: self).or(Game.where(black_player_id: self))
@@ -30,6 +31,10 @@ class Player < ApplicationRecord
 
   def total_games
     games_won + games_lost + games_in_progress + games_drawn
+  end
+
+  def age
+    ((Time.zone.now - date_of_birth.to_time) / 1.year.seconds).floor
   end
 
   def self.from_omniauth(auth)

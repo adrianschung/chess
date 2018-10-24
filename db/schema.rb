@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181010135151) do
+ActiveRecord::Schema.define(version: 20181024150741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 20181010135151) do
     t.string   "playername"
     t.integer  "pieces_id"
     t.string   "avatar"
+    t.string   "country"
+    t.date     "birthyear"
     t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
     t.index ["pieces_id"], name: "index_players_on_pieces_id", using: :btree
     t.index ["playername"], name: "index_players_on_playername", using: :btree
