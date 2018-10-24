@@ -22,17 +22,15 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = current_game
-    @pieces = @game.pieces.where(captured: false)
+    @pieces = current_game.pieces.where(captured: false)
     @chess_board = Games::RenderChessboard.call(@pieces)
   end
 
   def update
-    @game = Game.find(params[:id])
-    if @game.valid? && current_player != @game.white_player
-      @game.update(black_player: current_player, state: 1)
-      @game.add_pieces_to_board
-      redirect_to game_path(@game)
+    if current_game.valid? && current_player != current_game.white_player
+      current_game.update(black_player: current_player, state: 1)
+      current_game.add_pieces_to_board
+      redirect_to game_path(current_game)
     else
       render :new, status: :unprocessable_entity
     end
@@ -53,6 +51,7 @@ class GamesController < ApplicationController
     grid
   end
 
+  herlp_method :current_game
   def current_game
     @current_game ||= Game.find(params[:id])
   end

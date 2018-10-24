@@ -1,29 +1,29 @@
 <div id="game" class='game_wrapper'>
 	<section class="inner">
 		<section>
-			<h1><%= @game.name %></h1>
+			<h1><%= current_game.name %></h1>
 			<ul>
-				<li><h4><span>Game Author: </span><%= @game.white_player.playername %></h4></li>
-				<li><h4><span>Date Created: </span><%= @game.created_at.strftime("%b %d, %Y") %></h4></li>
-				<li><h4><span>White Player: </span><%= @game.white_player.playername %></h4></li>
-				<li><h4><span>Black Player: </span><%= @game.black_player ? @game.black_player.playername : 'Waiting for player' %></h4></li>
+				<li><h4><span>Game Author: </span><%= current_game.white_player.playername %></h4></li>
+				<li><h4><span>Date Created: </span><%= current_game.created_at.strftime("%b %d, %Y") %></h4></li>
+				<li><h4><span>White Player: </span><%= current_game.white_player.playername %></h4></li>
+				<li><h4><span>Black Player: </span><%= current_game.black_player ? current_game.black_player.playername : 'Waiting for player' %></h4></li>
 			</ul>
 		</section>
 
-		<h1 id='game_state'><%= @game.state %></h1>
+		<h1 id='game_state'><%= current_game.state %></h1>
 
 		<h3>Special Moves</h3>
 		<%= button_tag "Castle Queenside",
 			class: 'castle',
 			data: {
-				url: game_castle_path(@game),
+				url: game_castle_path(current_game),
 				direction: 'queenside'
 			}
 		%>
 		<%= button_tag "Castle Kingside",
 			class: 'castle',
 			data: {
-				url: game_castle_path(@game),
+				url: game_castle_path(current_game),
 				direction: 'kingside'
 			}
 		%>
