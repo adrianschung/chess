@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:avatar)
+    params.permit(:avatar, :country, :birthyear)
   end
 
   helper_method :current_player
