@@ -5,7 +5,7 @@ class Player < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook google_oauth2]
   mount_uploader :avatar, AvatarUploader
-  attribute :country, :string, default: "N/A"
+  attribute :country, :string, default: 'N/A'
 
   def games
     Game.where(white_player_id: self).or(Game.where(black_player_id: self))
@@ -17,12 +17,12 @@ class Player < ApplicationRecord
 
   def games_won
     games.where(white_player_id: self, state: 4)
-        .or(games.where(black_player_id: self, state: 3)).count
+         .or(games.where(black_player_id: self, state: 3)).count
   end
 
   def games_lost
     games.where(white_player_id: self, state: 3)
-        .or(games.where(black_player_id: self, state: 4)).count
+         .or(games.where(black_player_id: self, state: 4)).count
   end
 
   def games_drawn

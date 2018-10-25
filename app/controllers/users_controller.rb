@@ -16,6 +16,6 @@ class UsersController < ApplicationController
 
   helper_method :current_player
   def current_player
-    @player ||= Player.find(params[:id])
+    @current_player ||= Player.find(params[:id])
   end
 end

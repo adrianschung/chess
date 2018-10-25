@@ -1,7 +1,6 @@
 class SpecialMovesController < ApplicationController
   def castle
-    player = get_player(current_game)
-    king = current_game.pieces.where(type: 'King').find_by(player: player)
+    king = current_game.pieces.where(type: 'King').find_by(player: get_player(current_game))
     Pieces::King::Castle.call(king, castle_params[:direction])
     redirect_to game_path(current_game)
   end
@@ -11,11 +10,9 @@ class SpecialMovesController < ApplicationController
   end
 
   def promotion
-    player = get_player(current_game)
     pawn.update_attributes(piece_params)
     redirect_to game_path(current_game)
   end
-
 
   private
 
@@ -28,7 +25,7 @@ class SpecialMovesController < ApplicationController
   end
 
   def current_game
-    @game ||= Game.find(params[:game_id])
+    @current_game ||= Game.find(params[:game_id])
   end
 
   def game_pieces
@@ -36,7 +33,7 @@ class SpecialMovesController < ApplicationController
   end
 
   def pawn
-    pawn = game_pieces.where(row: 7).or(game_pieces.where(row: 0).where(type: 'Pawn'))
+    game_pieces.where(row: 7).or(game_pieces.where(row: 0).where(type: 'Pawn'))
   end
 
   def get_player(game)

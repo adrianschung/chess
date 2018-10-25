@@ -1,6 +1,5 @@
 AllCops:
   Exclude:
-    - Gemfile
     - Rakefile
     - 'db/schema.rb'
     - 'bin/*'
@@ -28,3 +27,9 @@ Metrics/BlockLength:
 
 Style/EmptyMethod:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/SymbolArray:
+  EnforcedStyle: brackets

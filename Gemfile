@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
-ruby "2.4.4"
+ruby '2.4.4'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
-
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.7'
@@ -38,41 +39,37 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
-  gem 'pry'
-  gem 'figaro'
-  gem 'rspec-rails', '~> 3.5'
-  gem 'factory_bot_rails'
-  gem 'capybara'
-  gem 'database_cleaner'
   gem 'awesome_print'
-  gem "chromedriver-helper"
-  gem 'selenium-webdriver', '~> 2.53', '>= 2.53.4'
+  gem 'byebug', platform: :mri
+  gem 'capybara'
+  gem 'chromedriver-helper'
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'figaro'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
+  gem 'pry'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'selenium-webdriver', '~> 2.53', '>= 2.53.4'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
+  gem 'rubocop', '~> 0.56.0', require: false
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rubocop', '~> 0.56.0', require: false
+  gem 'web-console', '>= 3.3.0'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
 gem 'bootstrap', '~> 4.1.1'
-
-# User authentication
+gem 'carrierwave', '~> 1.0'
 gem 'devise'
+gem 'jquery-ui-rails'
+gem 'mini_magick'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-
 gem 'simple_form'
-gem 'jquery-ui-rails'
-gem 'carrierwave', '~> 1.0'
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
-gem 'mini_magick'
