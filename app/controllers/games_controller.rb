@@ -51,7 +51,7 @@ class GamesController < ApplicationController
     grid
   end
 
-  herlp_method :current_game
+  helper_method :current_game
   def current_game
     @current_game ||= Game.find(params[:id])
   end
