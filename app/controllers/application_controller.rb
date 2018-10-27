@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   private
 
   def valid_player
-    if current_user != @game.white_player || current_user != @game.black_player
+    if current_player != @game.white_player || current_player != @game.black_player
       flash[:error] = 'You are not participating in this game'
       redirect_to games_path
     end
