@@ -4,10 +4,10 @@
     <div class="ui list">
       <div class="item">
         <% @conversations.each do |conversation| %>
-          <% if conversation.sender_id == current_user.id %>
-            <% recipient = User.find(conversation.recipient_id) %>
+          <% if conversation.sender_id == current_player.id %>
+            <% recipient = Player.find(conversation.recipient_id) %>
           <% else %>
-            <% recipient = User.find(conversation.sender_id) %>
+            <% recipient = Player.find(conversation.sender_id) %>
           <% end %>
           <%= link_to recipient.first_name, conversation_messages_path(conversation) %>        
         <% end %>
@@ -15,12 +15,12 @@
     </div>
   </div>
   <div class="ui segment">
-    <h3>All Users</h3>
+    <h3>All Players</h3>
     <div class="ui list">
-      <% @users.each do |user| %>
-        <% if user.id != current_user.id %>
+      <% @players.each do |player| %>
+        <% if player.id != current_player.id %>
           <div class="item">
-            <%= user.first_name %> <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post'%>
+            <%= player.playername %> <%= link_to 'Message me!', conversations_path(sender_id: current_player.id, recipient_id: player.id), method: 'post'%>
           </div>
         <% end %>
       <% end %>
