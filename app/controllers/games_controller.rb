@@ -59,4 +59,13 @@ class GamesController < ApplicationController
   def game_params
     params.permit(:name)
   end
+
+  def valid_player
+    if current_player != current_game.white_player && current_player != current_game.black_player
+      flash[:error] = 'You are not participating in this game'
+      redirect_to games_path
+    else
+      render game_path(current_game)
+    end
+  end
 end
