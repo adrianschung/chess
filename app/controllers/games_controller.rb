@@ -29,6 +29,7 @@ class GamesController < ApplicationController
   def update
     if current_game.valid? && current_player != current_game.white_player
       current_game.update(black_player: current_player, state: 1)
+      PlayerMailer.game_joined(current_game).deliver_now
       current_game.add_pieces_to_board
       redirect_to game_path(current_game)
     else
