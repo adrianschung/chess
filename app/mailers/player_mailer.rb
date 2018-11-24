@@ -15,6 +15,7 @@ class PlayerMailer < ApplicationMailer
     else
       @player = conversation.sender
     end
+    @url = conversation_messages_path(message.conversation)
     @sender = message.player
     mail(to: @player.email,
       subject: "A player has sent you an message")
