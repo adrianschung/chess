@@ -40,11 +40,7 @@ class Game < ApplicationRecord
   def checkmate?(player)
     return false unless check?(player)
     return false unless endgame?(player)
-    checkmate(player)
-  end
-
-  def checkmate(player)
-    player == white_player ? update(state: 3) : update(state: 4)
+    true
   end
 
   def stalemate(player)
