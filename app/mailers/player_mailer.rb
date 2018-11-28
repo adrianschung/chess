@@ -2,20 +2,20 @@ class PlayerMailer < ApplicationMailer
   default from: "do-not-reply@chesssenders.com"
 
   def game_joined(game)
+    @game = game
     @opponent = game.black_player
     @player = game.white_player
-    @url = game_path(game)
     mail(to: @player.email,
       subject: "A player has joined your game")
   end
 
   def message_sent(message)
-    if message.player == conversation.sender
-      @player = conversation.recipient
+    @conversation = message.conversation
+    if message.player == @conversation.sender
+      @player = @conversation.recipient
     else
-      @player = conversation.sender
+      @player = @conversation.sender
     end
-    @url = conversation_messages_path(message.conversation)
     @sender = message.player
     mail(to: @player.email,
       subject: "A player has sent you an message")

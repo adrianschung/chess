@@ -10,7 +10,7 @@
       <% @opponent.playername %> has sent you a message!
     </p>
     <p>
-      Click the link to see the conversation: <% @url %><br>
+      Click the link to see the conversation: <% link_to 'here', conversation_messages_path(@conversation) %><br>
     </p>
     <p>Thanks for playing and have a great day!</p>
   </body>

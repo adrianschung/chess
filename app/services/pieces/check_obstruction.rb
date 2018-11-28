@@ -97,7 +97,7 @@ module Pieces
 
     def check_up_and_right
       obstructable_squares = []
-      ((piece.column + 1)...opponent_piece.column).each do |x|
+      ((piece.column + 1)...opponent_king.column).each do |x|
         ((opponent_king.row + 1)...piece.row).each do |y|
           obstructable_squares.push([y, x])
         end
@@ -115,7 +115,7 @@ module Pieces
 
     def check_down_and_right
       obstructable_squares = []
-      ((piece.column + 1)...opponent_piece.column).each do |x|
+      ((piece.column + 1)...opponent_king.column).each do |x|
         ((piece.row + 1)...opponent_king.row).each do |y|
           obstructable_squares.push([y, x])
         end

@@ -10,7 +10,7 @@
       <% @opponent.playername %> has joined your game and is ready to play!
     </p>
     <p>
-      Click the link to play: <% @url %><br>
+      Click the link to play: <% link_to 'here', game_url(@game) %><br>
     </p>
     <p>Thanks for waiting and have a good luck!</p>
   </body>

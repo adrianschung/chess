@@ -2,6 +2,6 @@ Hello <% @player.playername %>,
 
 This is a message from Chess Senders.
 <% @opponent.playername %> has joined your game and is ready to play!
-Click the link to play: <% @url %>
+Click the link to play: <% link_to 'here', game_url(@game) %>
 
 Thanks for waiting and good luck!

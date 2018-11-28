@@ -1,11 +1,11 @@
 class GamesController < ApplicationController
   before_action :authenticate_player!
-  before_action :valid_player, only: [:show, :update]
+#  before_action :valid_player, only: [:show, :update]
   helper_method :current_game
   helper_method :render_piece
 
   def index
-    @games = Game.where('white_player_id != ?', current_player.id)
+    @games = Game.where(state: 0).where.not(white_player_id: current_player.id)
   end
 
   def new

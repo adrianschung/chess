@@ -49,6 +49,8 @@ class Game < ApplicationRecord
     update(state: 5)
   end
 
+  protected
+
   def endgame?(player)
     king = pieces.where(player: player, type: 'King', captured: false).first
     opponent_pieces = pieces.where.not(player: player, captured: true)

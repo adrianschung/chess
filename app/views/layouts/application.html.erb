@@ -43,7 +43,7 @@
                   <li id='my_games_dropdown'>
                     <span class='opener'>My Games</span>
 										<ul>
-                      <% current_player.games.each do |game| %>
+                      <% @my_games.each do |game| %>
   											<li>
                           <%= link_to game.name, game_path(game) %>
                         </li>
