@@ -57,7 +57,7 @@ class Game < ApplicationRecord
       check_piece = piece if piece.valid_move?(row: king.row, column: king.column)
     end
     return false if check_piece.can_obstruct? || check_piece.can_capture?
-#    return false if king.can_move?
+    return false if king.can_move?
     true
   end
 end
