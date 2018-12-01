@@ -1,0 +1,17 @@
+.conversation_wrapper {
+  width: 85vh;
+  max-width: 85vw;
+  margin: 6rem auto 3rem auto;
+
+  ul {
+    border-left: 1px solid white;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  span {
+    text-transform: capitalize;
+  }
+}
