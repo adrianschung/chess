@@ -260,7 +260,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ['FACEBOOK_APP_SECRET']
   config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
-  OmniAuth.config.full_host = Rails.env.production? ? 'https://chess-adrian-chung.herokuapp.com/' : 'http://localhost:3000'
+  OmniAuth.config.full_host = Rails.env.production? ? 'https://domain.com' : 'http://localhost:3000'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
