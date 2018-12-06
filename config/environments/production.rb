@@ -58,7 +58,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "chess_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: 'https://chess-senders.herokuapp.com/' }
+  config.action_mailer.default_url_options = { host: 'https://chess-senders.herokuapp.com' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -97,6 +97,4 @@ Rails.application.configure do
     user_name: ENV["GMAIL_USERNAME"],
     password: ENV["GMAIL_PASSWORD"]
   }
-
-  config.action_mailer.default_url_options = { :host => "chess-adrian-chung.herokuapp.com/" }
 end
