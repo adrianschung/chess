@@ -61,10 +61,11 @@ RSpec.describe Piece, type: :model do
   end
 
   describe 'Capturing a piece' do
+    player1 = FactoryBot.create(:player, playername: 'Wayne')
+    player2 = FactoryBot.create(:player, playername: 'Ricky')
+    game = FactoryBot.create(:game, white_player: player1, black_player: player2)
+    
     it 'Should not move to new location if same colour piece is there' do
-      player1 = FactoryBot.create(:player, playername: 'Wayne')
-      player2 = FactoryBot.create(:player, playername: 'Ricky')
-      game = FactoryBot.create(:game, white_player: player1, black_player: player2)
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
       piece_end = FactoryBot.create(:piece, game: game, column: 3, row: 3, player: player1)
       piece_start.move_to!(row: piece_end.row, column: piece_end.column)
@@ -74,9 +75,6 @@ RSpec.describe Piece, type: :model do
     end
 
     it 'Should move to new location and capture opponents piece' do
-      player1 = FactoryBot.create(:player, playername: 'Wayne')
-      player2 = FactoryBot.create(:player, playername: 'Ricky')
-      game = FactoryBot.create(:game, white_player: player1, black_player: player2)
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
       piece_end = FactoryBot.create(:piece, game: game, column: 3, row: 3, player: player2)
       piece_start.move_to!(row: piece_end.row, column: piece_end.column)
@@ -87,9 +85,6 @@ RSpec.describe Piece, type: :model do
     end
 
     it 'Should move to new location if no other piece is there' do
-      player1 = FactoryBot.create(:player, playername: 'Wayne')
-      player2 = FactoryBot.create(:player, playername: 'Ricky')
-      game = FactoryBot.create(:game, white_player: player1, black_player: player2)
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
       piece_start.move_to!(row: 2, column: 2)
       expect(piece_start.column).to eq(2)
@@ -97,9 +92,6 @@ RSpec.describe Piece, type: :model do
     end
 
     it 'Should not move to new location if own piece is there' do
-      player1 = FactoryBot.create(:player, playername: 'Wayne')
-      player2 = FactoryBot.create(:player, playername: 'Ricky')
-      game = FactoryBot.create(:game, white_player: player1, black_player: player2)
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
       FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1)
       piece_start.move_to!(row: 2, column: 2)
