@@ -21,10 +21,6 @@ class Pawn < Piece
     transaction do
       if valid_move?(new_square)
         Pieces::MoveTo.call(self, new_square)
-        # temporary promotion solution, need to have a choice of promotion
-        if promotion?
-          update(type: 'Queen')
-        end
       elsif valid_en_passant_move?(new_square)
         Pieces::EnPassant.call(self, new_square)
       end
@@ -80,10 +76,6 @@ class Pawn < Piece
 
   def white_player?
     game.white_player_id == player.id
-  end
-
-  def promotion?
-    white_player? && new_square == 7 || new_square.zero?
   end
 
   def valid_en_passant_move?(*)

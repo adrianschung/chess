@@ -30,6 +30,7 @@ class Game < ApplicationRecord
 
   def check?(player)
     king = pieces.where(player: player, type: 'King', captured: false).first
+    return false if king == nil
     opponent_pieces = pieces.where.not(player: player, captured: true)
     opponent_pieces.each do |piece|
       return true if piece.valid_move?(row: king.row, column: king.column)

@@ -46,17 +46,16 @@ module Pieces
     end
 
     def check_diagonal_squares
-      obstructable_squares = []
       if moving_up? && moving_left?
-        check_diagonal(opp_king.column, piece.column, opp_king.row, piece.row)
+        squares = check_diagonal(opp_king.column, piece.column, opp_king.row, piece.row)
       elsif moving_up?
-        check_diagonal(piece.column, opp_king.column, opp_king.row, piece.row)
+        squares = check_diagonal(piece.column, opp_king.column, opp_king.row, piece.row)
       elsif moving_left?
-        check_diagonal(opp_king.column, piece.column, piece.row, opp_king.row)
+        squares = check_diagonal(opp_king.column, piece.column, piece.row, opp_king.row)
       else
-        check_diagonal(piece.column, opp_king.column, piece.row, opp_king.row)
+        squares = check_diagonal(piece.column, opp_king.column, piece.row, opp_king.row)
       end
-      return true if valid_obstruction?(obstructable_squares)
+      return true if valid_obstruction?(squares)
       false
     end
 
@@ -87,6 +86,7 @@ module Pieces
     end
 
     def check_diagonal(column1, column2, row1, row2)
+      obstructable_squares = []
       ((column1 + 1)...column2).each do |x|
         ((row1 + 1)...row2).each do |y|
           obstructable_squares.push([y, x])
