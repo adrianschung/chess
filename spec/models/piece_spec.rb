@@ -75,6 +75,9 @@ RSpec.describe Piece, type: :model do
     end
 
     it 'Should move to new location and capture opponents piece' do
+      player1 = FactoryBot.create(:player, playername: 'Wayne')
+      player2 = FactoryBot.create(:player, playername: 'Ricky')
+      game = FactoryBot.create(:game, white_player: player1, black_player: player2)
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
       piece_end = FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player2)
       piece_start.move_to!(row: piece_end.row, column: piece_end.column)
@@ -104,11 +107,20 @@ RSpec.describe Piece, type: :model do
     player1 = FactoryBot.create(:player, playername: 'white_player')
     player2 = FactoryBot.create(:player, playername: 'black_player')
     game = FactoryBot.create(:game, white_player: player1, black_player: player2)
+    king = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1, type: 'King')
     
     it 'will assert that it can be captured' do
       piece1 = FactoryBot.create(:piece, game: game, column: 0, row: 0, player: player1, type: 'Rook')
       piece2 = FactoryBot.create(:piece, game: game, column: 7, row: 0, player: player2, type: 'Rook')
       expect(piece1.can_capture?).to eq(true)
+    end
+
+    it 'will assert that is can be obstructed horizontally' do
+      king = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1, type: 'King')
+      rook = FactoryBot.create(:piece, game: game, column: 3, row: 1, player: player2, type: 'Rook')
+      blocker = FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1, type: 'Rook')
+      expect(game.check?(player1)).to eq(true)
+      expect(rook.can_obstruct?).to eq(true)
     end
   end
 end
