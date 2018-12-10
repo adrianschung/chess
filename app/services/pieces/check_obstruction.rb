@@ -92,6 +92,7 @@ module Pieces
           obstructable_squares.push([y, x])
         end
       end
+      return obstructable_squares
     end
 
     attr_accessor :game, :piece, :new_square

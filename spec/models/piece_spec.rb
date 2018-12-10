@@ -130,5 +130,13 @@ RSpec.describe Piece, type: :model do
       expect(game.check?(player1)).to eq(true)
       expect(rook.can_obstruct?).to eq(true)
     end
+
+    it 'will asser that it can be obstructued diagonally' do
+      king = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1, type: 'King')
+      queen = FactoryBot.create(:piece, game: game, column: 4, row: 4, player: player2, type: 'Bishop')
+      blocker = FactoryBot.create(:piece, game: game, column: 2, row: 3, player: player1, type: 'Rook')
+      expect(game.check?(player1)).to eq(true)
+      expect(queen.can_obstruct?).to eq(true)
+    end
   end
 end
