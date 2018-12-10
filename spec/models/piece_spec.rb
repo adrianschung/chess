@@ -115,9 +115,17 @@ RSpec.describe Piece, type: :model do
       expect(piece1.can_capture?).to eq(true)
     end
 
-    it 'will assert that is can be obstructed horizontally' do
+    it 'will assert that it can be obstructed horizontally' do
       king = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1, type: 'King')
       rook = FactoryBot.create(:piece, game: game, column: 3, row: 1, player: player2, type: 'Rook')
+      blocker = FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1, type: 'Rook')
+      expect(game.check?(player1)).to eq(true)
+      expect(rook.can_obstruct?).to eq(true)
+    end
+
+    it 'will assert that it can be obstructed vertically' do
+      king = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1, type: 'King')
+      rook = FactoryBot.create(:piece, game: game, column: 1, row: 3, player: player2, type: 'Rook')
       blocker = FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1, type: 'Rook')
       expect(game.check?(player1)).to eq(true)
       expect(rook.can_obstruct?).to eq(true)
