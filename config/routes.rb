@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :games do
     put '/castle' => 'special_moves#castle'
   end
+  resources :player, only: [:show, :edit, :update]
   resources :pieces, only: :update
   resources :conversations do
     resources :messages

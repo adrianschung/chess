@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class PlayersController < ApplicationController
   before_action :authenticate_user!, only: [:edit]
   
   def show
