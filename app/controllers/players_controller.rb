@@ -1,16 +1,19 @@
-class PlayersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit]
+class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :update]
   
   def show
   end
 
   def edit
-    current_player.update_attributes(user_params)
+  end
+
+  def update
+    current_player.update_attributes(player_params)
   end
 
   private
 
-  def user_params
+  def player_params
     params.permit(:avatar, :country, :birthyear)
   end
 
