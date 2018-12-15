@@ -10,7 +10,7 @@ class King < Piece
     super &&
       valid_movement?(1, -1, new_square[:row] - row) &&
       valid_movement?(1, -1, new_square[:column] - column) &&
-      valid_space?(new_square)
+      valid_space?(new_square) || castle(new_square)
   end
 
   def castle!(direction)
@@ -32,6 +32,14 @@ class King < Piece
   def valid_space?(new_space)
     opponent_pieces.each do |piece|
       return false if piece.valid_move?(new_space)
+    end
+  end
+
+  def castle(new_space)
+    rook = game.pieces.where(row: new_space[:row], column: new_space[:column], type: 'Rook', captured: false, moves: 0).first
+    return false if !rook || king.moves != 0
+    if rook.column == 0
+    else
     end
   end
 end
