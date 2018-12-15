@@ -39,14 +39,12 @@ class Game < ApplicationRecord
   end
 
   def checkmate?(player)
-    return false unless check?(player)
-    return false unless endgame?(player)
+    return false unless check?(player) && endgame?(player)
     true
   end
 
   def stalemate(player)
-    return false if check?(player)
-    return false unless endgame?(player)
+    return false if check?(player) || !endgame?(player)
     update(state: 5)
   end
 
