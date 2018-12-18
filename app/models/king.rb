@@ -37,6 +37,7 @@ class King < Piece
 
   def castle(new_space)
     return false if !rook || self.moves != 0 || Pieces::Obstruction.call(self, rook)
+    return false unless new_space[:column] == 2 || new_space[:column] == 7
     if new_space[:column] == 2
       rook = game.pieces.where(row: new_space[:row], column: 0, type: 'Rook', captured: false).first
     elsif new_space[:column] == 6
