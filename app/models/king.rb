@@ -11,15 +11,20 @@ class King < Piece
       if valid_move?(new_square)
         Pieces::MoveTo.call(self, new_square)
         Games::UpdateState.call(game)
-      end
-      if castle?(new_square)
-        if new_square[:column] == 2
-          @rook.update_attributes(column: 3)
-          self.update_attributes(column: 2)
-        elsif new_square[:column] == 6
-          @rook.update_attributes(column: 5)
-          self.update_attributes(column: 6)
+      else
+        if castle?(new_square)
+          if new_square[:column] == 2
+            rook = game.pieces.where(row: new_square[:row], column: 0, type: 'Rook', captured: false).first
+            self.update_attributes(column: 2, moves: 1)
+            rook.castle(new_square)
+          elsif new_square[:column] == 6
+            rook = game.pieces.where(row: new_square[:row], column: 7, captured: false).first
+            self.update_attributes(column: 6, moves: 1)
+            rook.castle(new_square)
+          end
+          Games::UpdateState.call(game)
         end
+      end
       raise ActiveRecord::Rollback if game.check?(player)
     end
   end
@@ -54,13 +59,13 @@ class King < Piece
   end
 
   def castle?(new_space)
-    @rook = nil
-    return false unless new_space[:column] == 2 || new_space[:column] == 7 || self.moves == 0
+    return false unless new_space[:column] == 2 || new_space[:column] == 6 || self.moves == 0
     if new_space[:column] == 2
-      @rook = game.pieces.where(row: new_space[:row], column: 0, type: 'Rook', captured: false).first
+      rook = game.pieces.where(row: new_space[:row], column: 0, type: 'Rook', captured: false).first
     elsif new_space[:column] == 6
-      @rook = game.pieces.where(row: new_space[:row], column: 7, type: 'Rook', captured: false).first
+      rook = game.pieces.where(row: new_space[:row], column: 7, type: 'Rook', captured: false).first
     end
-    return false if !@rook || Pieces::Obstruction.call(self, @rook)
+    return false if !rook || Pieces::Obstruction.call(self, rook) || rook.moves =! 0
+    true
   end
 end
