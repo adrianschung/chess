@@ -95,5 +95,19 @@ RSpec.describe King, type: :model do
       expect(rook.moves).to eq(1)
       expect(rook.column).to eq(3)
     end
+
+    it 'is able to castle kingside' do
+      white_player = FactoryBot.create(:player, playername: 'Wayne')
+      black_player = FactoryBot.create(:player, playername: 'Ricky')
+      game = FactoryBot.create(:game, white_player: white_player, black_player: black_player)
+      king = FactoryBot.create(:king, game: game, player: white_player, row: 0, column: 4)
+      rook = FactoryBot.create(:rook, game: game, player: white_player, row: 0, column: 7)
+      king.move_to!(row: 0, column: 6)
+      rook.reload
+      expect(king.column).to eq(6)
+      expect(king.moves).to eq(1)
+      expect(rook.moves).to eq(1)
+      expect(rook.column).to eq(5)
+    end
   end
 end
