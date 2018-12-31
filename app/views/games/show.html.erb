@@ -12,21 +12,6 @@
 
 		<h1 id='game_state'><%= current_game.state %></h1>
 
-		<h3>Special Moves</h3>
-		<%= button_tag "Castle Queenside",
-			class: 'castle',
-			data: {
-				url: game_castle_path(current_game),
-				direction: 'queenside'
-			}
-		%>
-		<%= button_tag "Castle Kingside",
-			class: 'castle',
-			data: {
-				url: game_castle_path(current_game),
-				direction: 'kingside'
-			}
-		%>
 		<br />
 		<br />
 
