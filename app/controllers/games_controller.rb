@@ -36,6 +36,17 @@ class GamesController < ApplicationController
     end
   end
 
+  def forfeit
+    if current_player == current_game.white_player
+      current_game.update(state: 3)
+    elsif current_player == current_game.black_player
+      current_game.update(state: 4)
+    else
+      flash[:alert] = 'You are not participating in this game'
+      redirect_to games_path
+    end
+  end
+
   private
 
   def multidimensional_grid(pieces)
