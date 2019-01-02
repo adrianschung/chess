@@ -9,12 +9,10 @@
 				<li><h4><span>Black Player: </span><%= current_game.black_player ? current_game.black_player.playername : 'Waiting for player' %></h4></li>
 			</ul>
 		</section>
-
 		<h1 id='game_state'><%= current_game.state %></h1>
-
 		<br />
+		<%= button_to 'Forfeit', game_forfeit_path, :method=> :put, %>
 		<br />
-
 			<table class='chessboard'>
 				<% @chess_board.each_with_index do |row, y| %>
 					<tr>
@@ -38,14 +36,11 @@
 					</tr>
 				<% end %>
 			</table>
-
-
 	</section>
 </div>
 
 <script type="text/javascript">
 	$(()=>{
-
 		$('.castle').click((e)=>{
 			$.ajax({
 				type: 'PUT',

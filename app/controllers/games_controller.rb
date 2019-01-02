@@ -39,8 +39,10 @@ class GamesController < ApplicationController
   def forfeit
     if current_player == current_game.white_player
       current_game.update(state: 3)
+      redirect_to game_path(current_game)
     elsif current_player == current_game.black_player
       current_game.update(state: 4)
+      redirect_to game_path(current_game)
     else
       flash[:alert] = 'You are not participating in this game'
       redirect_to games_path
