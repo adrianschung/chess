@@ -11,7 +11,7 @@
 		</section>
 		<h1 id='game_state'><%= current_game.state %></h1>
 		<br />
-		<%= button_to 'Forfeit', game_forfeit_path, :method=> :put, %>
+		<%= button_to 'Forfeit', game_forfeit_path(current_game), :method=> :put, %>
 		<br />
 			<table class='chessboard'>
 				<% @chess_board.each_with_index do |row, y| %>

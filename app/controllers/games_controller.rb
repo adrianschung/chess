@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_player!
+  before_action :validate_player!, only: :forfeit
   helper_method :current_game
   helper_method :render_piece
 
@@ -50,6 +51,13 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def validate_player!
+    if current_player != current_game.white_player || current_player != current_game.black_player
+      flash[:alert] = 'You are not participating in this game'
+      redirect_to games_path
+    end
+  end
 
   def multidimensional_grid(pieces)
     grid = []
