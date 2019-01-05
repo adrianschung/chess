@@ -30,6 +30,7 @@
             <section class='player_dashboard'>
               <h3>// <span>Dashboard</span></h3>
               <p>Last active: <%= current_player.last_sign_in_at.strftime("%b %d, %Y") %></p>
+              <li><%= link_to 'My Profile', player_path(current_player) %></li>
               <h3><span>Games won:</span> <%= current_player.games_won %></h3>
               <h3><span>Games lost:</span> <%= current_player.games_lost %></h3>
               <h3><span>Games tied:</span> <%= current_player.games_drawn %></h3>
