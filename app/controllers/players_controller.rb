@@ -17,8 +17,8 @@ class PlayersController < ApplicationController
     params.permit(:avatar, :country, :birthyear)
   end
 
-  helper_method :current_player
-  def current_player
-    @current_player ||= Player.find(params[:id])
+  helper_method :player_profile
+  def player_profile
+    @player_profile ||= Player.find(params[:id])
   end
 end
