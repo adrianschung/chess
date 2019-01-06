@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :games do
     put '/forfeit' => 'games#forfeit'
   end
-  resources :player, only: [:show, :edit, :update]
+  resources :players, only: [:show, :edit, :update]
   resources :pieces, only: :update
   resources :conversations do
     resources :messages

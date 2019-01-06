@@ -33,10 +33,6 @@ class Player < ApplicationRecord
     games_won + games_lost + games_in_progress + games_drawn
   end
 
-  def age
-    ((Time.zone.now - date_of_birth.to_time) / 1.year.seconds).floor
-  end
-
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |player|
       player.email = auth.info.email

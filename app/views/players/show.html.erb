@@ -1,8 +1,7 @@
 <div class="player-show">
   <h2><%= player_profile.playername %></h2>
-  <%= image_tag(user.a_profilevatar) %>
+  <%= image_tag(player_profile.avatar) %>
   <p>Last active: <%= player_profile.last_sign_in_at.strftime("%b %d, %Y") %></p>
-  <p>Age: <%= player_profile.age %> years</p>
   <p>Location: <%= player_profile.country %></p>
   <h3><span>Games won:</span> <%= current_player.games_won %></h3>
   <h3><span>Games lost:</span> <%= current_player.games_lost %></h3>
