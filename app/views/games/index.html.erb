@@ -1,11 +1,11 @@
 <section id='games_index'>
-  <div class="inner">
+  <div class='inner'>
     <h1>Join a Game</h1>
 
     <ul>
       <% @games.available.each do |game| %>
         <li>
-          <div class="game">
+          <div class='game'>
             <h1><%= game.name %></h1>
             <ul>
               <li><h4><span>White Player: </span><%= game.white_player.playername %></h4></li>

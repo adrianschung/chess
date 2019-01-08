@@ -1,9 +1,9 @@
-<div class='conversation_wrapper'>
+<div id='conversation_wrapper'>
   <section class='inner'>
-  <div class="ui segment">
+  <div>
     <h3>Conversations</h3>
-    <div class="ui list">
-      <div class="item">
+    <div>
+      <div>
         <% @conversations.each do |conversation| %>
           <% if conversation.sender_id == current_player.id %>
             <% recipient = Player.find(conversation.recipient_id) %>
@@ -15,12 +15,12 @@
       </div>
     </div>
   </div>
-  <div class="ui segment">
+  <div>
     <h3>All Players</h3>
-    <div class="ui list">
+    <div>
       <% @players.each do |player| %>
         <% if player.id != current_player.id %>
-          <div class="item">
+          <div>
             <%= player.playername %> <%= link_to 'Message me!', conversations_path(sender_id: current_player.id, recipient_id: player.id), method: 'post'%>
           </div>
         <% end %>

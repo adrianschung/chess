@@ -1,20 +1,21 @@
-<div class="player-show">
-    <h2><%= player_profile.playername %></h2>
-    <%= image_tag(player_profile.avatar) %>
-    <p>Last active: <%= player_profile.last_sign_in_at.strftime("%b %d, %Y") %></p>
-    <p>Location: <%= player_profile.country %></p>
-    <h3><span>Games won:</span> <%= current_player.games_won %></h3>
-    <h3><span>Games lost:</span> <%= current_player.games_lost %></h3>
-    <h3><span>Games tied:</span> <%= current_player.games_drawn %></h3>
-    <h3><span>Games in progress:</span> <%= current_player.games_in_progress %></h3>
-    <h3><span>Total games played:</span> <%=current_player.total_games %></h3>
-    <br />
-    <% if current_player == player_profile %>
-      <%= link_to "Edit Profile", edit_player_path(current_player) %>
-    <% end %>
-    <% if player_profile.id != current_player.id %>
-      <div class="item">
-        <%= player_profile.playername %> <%= link_to 'Message me!', conversations_path(sender_id: current_player.id, recipient_id: player_profile.id), method: 'post'%>
-      </div>
-    <% end %>
+<div id='player_wrapper'>
+    <section class='inner'>
+        <h2><%= player_profile.playername %></h2>
+        <%= image_tag(player_profile.avatar) %>
+        <p>Last active: <%= player_profile.last_sign_in_at.strftime("%b %d, %Y") %></p>
+        <h3><span>Games won:</span> <%= current_player.games_won %></h3>
+        <h3><span>Games lost:</span> <%= current_player.games_lost %></h3>
+        <h3><span>Games tied:</span> <%= current_player.games_drawn %></h3>
+        <h3><span>Games in progress:</span> <%= current_player.games_in_progress %></h3>
+        <h3><span>Total games played:</span> <%=current_player.total_games %></h3>
+        <br />
+        <% if current_player == player_profile %>
+          <%= link_to 'Edit Profile', edit_player_path(current_player) %>
+        <% end %>
+        <% if player_profile.id != current_player.id %>
+          <div class='item'>
+            <%= player_profile.playername %> <%= link_to 'Message me!', conversations_path(sender_id: current_player.id, recipient_id: player_profile.id), method: 'post'%>
+          </div>
+        <% end %>
+    </section>
 </div>
