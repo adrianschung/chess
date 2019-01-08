@@ -1,12 +1,7 @@
 <div class="player-edit">
   <h2>Edit profile</h2>
-  <%= simple_form_for (current_player, as: :player, method: post, url: players_path) do |f| %>
+  <%= simple_form_for @player do |f| %>
     <%= f.input :avatar %>
     <%= f.submit "Add Avatar", class: 'btn btn-primary' %>
-  <% end %>
-  <%= simple_form_for (current_player, as: :player, method: post, url: players_path) do |f| %>
-    <%= f.input :birthyear, as: :date %>
-    <%= f.input :country, as: :string %>
-    <%= f.button :submit %>
   <% end %>
 </div>

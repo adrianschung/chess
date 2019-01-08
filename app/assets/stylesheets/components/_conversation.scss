@@ -1,0 +1,46 @@
+#conversation_wrapper {
+  width: 60%;
+  margin: 6rem auto;
+
+  .inner {
+    > h1 {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid _palette(border);
+     }
+
+    > ul {
+      > li {
+        @include vendor('display', 'flex');
+        @include vendor('justify-content', 'space-between');
+        margin-bottom: 3rem;
+        list-style: none;
+
+        > form {
+          margin-bottom: 0;
+          margin-top: auto;
+        }
+      }
+    }
+  }
+
+  .game {
+    display: block;
+
+    ul {
+      list-style: none;
+      border-left: 1px solid white;
+    }
+  }
+
+  @include breakpoint('<=small') {
+    width: 90%;
+  }
+
+  @include breakpoint('<=xsmall') {
+    .inner > ul > li {
+      display: block;
+    }
+  }
+}
