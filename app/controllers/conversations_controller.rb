@@ -3,11 +3,12 @@ class ConversationsController < ApplicationController
 
   def index
     @players = Player.all
-    @conversations = Conversation.where(sender_id: current_player.id).or(Conversation.where(recipient_id: current_player.id))
+    @conversations = Conversation.where(sender_id: current_player.id)
+                                 .or(Conversation.where(recipient_id: current_player.id))
   end
 
   def create
-    if Conversation.between(params[:sender_id],params[:recipient_id]).present?
+    if Conversation.between(params[:sender_id], params[:recipient_id]).present?
       @conversation = Conversation.between(params[:sender_id],
                                            params[:recipient_id]).first
     else
@@ -17,7 +18,7 @@ class ConversationsController < ApplicationController
   end
 
   private
-  
+
   def conversation_params
     params.permit(:sender_id, :recipient_id)
   end

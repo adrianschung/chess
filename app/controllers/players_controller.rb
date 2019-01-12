@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
   before_action :authenticate_player!, only: [:edit, :update]
-  
+
   def show
   end
 

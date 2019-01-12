@@ -1,12 +1,12 @@
 class PlayerMailer < ApplicationMailer
-  default from: "do-not-reply@chesssenders.com"
+  default from: 'do-not-reply@chesssenders.com'
 
   def game_joined(game)
     @game = game
     @opponent = game.black_player
     @player = game.white_player
     mail(to: @player.email,
-      subject: "A player has joined your game")
+      subject: 'A player has joined your game')
   end
 
   def message_sent(message)
@@ -18,6 +18,6 @@ class PlayerMailer < ApplicationMailer
     end
     @sender = message.player
     mail(to: @player.email,
-      subject: "A player has sent you an message")
+         subject: 'A player has sent you an message')
   end
 end
