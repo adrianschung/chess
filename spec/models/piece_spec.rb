@@ -64,7 +64,7 @@ RSpec.describe Piece, type: :model do
     player1 = FactoryBot.create(:player, playername: 'Wayne')
     player2 = FactoryBot.create(:player, playername: 'Ricky')
     game = FactoryBot.create(:game, white_player: player1, black_player: player2)
-    
+
     it 'Should not move to new location if same colour piece is there' do
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
       piece_end = FactoryBot.create(:piece, game: game, column: 3, row: 3, player: player1)
@@ -108,17 +108,18 @@ RSpec.describe Piece, type: :model do
     player2 = FactoryBot.create(:player, playername: 'black_player')
     game = FactoryBot.create(:game, white_player: player1, black_player: player2)
     king = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1, type: 'King')
-    
+
     it 'will assert that it can be captured' do
-      piece1 = FactoryBot.create(:piece, game: game, column: 0, row: 0, player: player1, type: 'Rook')
-      piece2 = FactoryBot.create(:piece, game: game, column: 7, row: 0, player: player2, type: 'Rook')
+      piece1 = FactoryBot.create(:piece, game: game, column: 0, row: 0,
+                                         player: player1, type: 'Rook')
+      FactoryBot.create(:piece, game: game, column: 7, row: 0, player: player2, type: 'Rook')
       expect(piece1.can_capture?).to eq(true)
     end
 
     it 'will assert that it can be obstructed horizontally' do
       king = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1, type: 'King')
       rook = FactoryBot.create(:piece, game: game, column: 3, row: 1, player: player2, type: 'Rook')
-      blocker = FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1, type: 'Rook')
+      FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1, type: 'Rook')
       expect(game.check?(player1)).to eq(true)
       expect(rook.can_obstruct?).to eq(true)
     end
@@ -126,15 +127,16 @@ RSpec.describe Piece, type: :model do
     it 'will assert that it can be obstructed vertically' do
       king = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1, type: 'King')
       rook = FactoryBot.create(:piece, game: game, column: 1, row: 3, player: player2, type: 'Rook')
-      blocker = FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1, type: 'Rook')
+      FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1, type: 'Rook')
       expect(game.check?(player1)).to eq(true)
       expect(rook.can_obstruct?).to eq(true)
     end
 
     it 'will asser that it can be obstructued diagonally' do
       king = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1, type: 'King')
-      queen = FactoryBot.create(:piece, game: game, column: 4, row: 4, player: player2, type: 'Bishop')
-      blocker = FactoryBot.create(:piece, game: game, column: 2, row: 3, player: player1, type: 'Rook')
+      queen = FactoryBot.create(:piece, game: game, column: 4, row: 4,
+                                        player: player2, type: 'Bishop')
+      FactoryBot.create(:piece, game: game, column: 2, row: 3, player: player1, type: 'Rook')
       expect(game.check?(player1)).to eq(true)
       expect(queen.can_obstruct?).to eq(true)
     end
