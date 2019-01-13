@@ -11,19 +11,9 @@ class King < Piece
       if valid_move?(new_square)
         Pieces::MoveTo.call(self, new_square)
         Games::UpdateState.call(game)
-      else
-        if castle?(new_square)
-          if new_square[:column] == 2
-            rook = game.pieces.where(row: new_square[:row], column: 0, type: 'Rook', captured: false).first
-            self.update_attributes(column: 2, moves: 1)
-            rook.castle(new_square)
-          elsif new_square[:column] == 6
-            rook = game.pieces.where(row: new_square[:row], column: 7, captured: false).first
-            self.update_attributes(column: 6, moves: 1)
-            rook.castle(new_square)
-          end
-          Games::UpdateState.call(game)
-        end
+      elsif castle?(new_square)
+        castle_move(new_square)
+        Games::UpdateState.call(game)
       end
       raise ActiveRecord::Rollback if game.check?(player)
     end
@@ -36,17 +26,13 @@ class King < Piece
       valid_space?(new_square)
   end
 
-  def castle!(direction)
-    Pieces::King::Castle.call(self, direction)
-  end
-
   def can_move?
     king_moves = {}
-    ((self.row - 1)..(self.row + 1)).each do |x|
-      ((self.column - 1)..(self.column + 1)).each do |y|
+    ((row - 1)..(row + 1)).each do |x|
+      ((column - 1)..(column + 1)).each do |y|
         king_moves[:row] = x
         king_moves[:column] = y
-        return true if self.valid_move?(king_moves)
+        return true if valid_move?(king_moves)
       end
     end
     false
@@ -59,13 +45,27 @@ class King < Piece
   end
 
   def castle?(new_space)
-    return false unless new_space[:column] == 2 || new_space[:column] == 6 || self.moves == 0
+    return false unless new_space[:column] == 2 || new_space[:column] == 6 || moves.zero?
+    if new_space[:column] == 2
+      rook = game.pieces.where(row: new_space[:row], column: 0,
+                               type: 'Rook', captured: false).first
+    elsif new_space[:column] == 6
+      rook = game.pieces.where(row: new_space[:row], column: 7,
+                               type: 'Rook', captured: false).first
+    end
+    return false if !rook || Pieces::Obstruction.call(self, rook) || !rook.moves.zero?
+    true
+  end
+
+  def castle_move(new_space)
     if new_space[:column] == 2
       rook = game.pieces.where(row: new_space[:row], column: 0, type: 'Rook', captured: false).first
+      update_attributes(column: 2, moves: 1)
+      rook.castle(new_space)
     elsif new_space[:column] == 6
-      rook = game.pieces.where(row: new_space[:row], column: 7, type: 'Rook', captured: false).first
+      rook = game.pieces.where(row: new_space[:row], column: 7, captured: false).first
+      update_attributes(column: 6, moves: 1)
+      rook.castle(new_space)
     end
-    return false if !rook || Pieces::Obstruction.call(self, rook) || rook.moves =! 0
-    true
   end
 end

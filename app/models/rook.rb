@@ -15,9 +15,9 @@ class Rook < Piece
 
   def castle(new_space)
     if new_space[:column] == 2
-      self.update_attributes(column: 3, moves: 1)
+      update_attributes(column: 3, moves: 1)
     elsif new_space[:column] == 6
-      self.update_attributes(column: 5, moves: 1)
+      update_attributes(column: 5, moves: 1)
     end
   end
 end

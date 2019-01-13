@@ -31,5 +31,8 @@ Style/EmptyMethod:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Style/Lambda:
+  EnforcedStyle: literal
+
 Style/SymbolArray:
   EnforcedStyle: brackets

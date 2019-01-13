@@ -1,5 +1,5 @@
 module Pieces
-  class CheckObstruction < ApplicationService # rubocop:disable Metrics/ClassLength
+  class CheckObstruction < ApplicationService
     def initialize(piece, new_square)
       @piece = piece
       @game = piece.game
@@ -46,17 +46,16 @@ module Pieces
     end
 
     def check_diagonal_squares
-      if moving_up? && moving_left?
-        squares = check_diagonal(opp_king.column, piece.column, opp_king.row, piece.row)
-      elsif moving_up?
-        squares = check_diagonal(piece.column, opp_king.column, opp_king.row, piece.row)
-      elsif moving_left?
-        squares = check_diagonal(opp_king.column, piece.column, piece.row, opp_king.row)
-      else
-        squares = check_diagonal(piece.column, opp_king.column, piece.row, opp_king.row)
-      end
-      return true if valid_obstruction?(squares)
-      false
+      squares = if moving_up? && moving_left?
+                  check_diagonal(opp_king.column, piece.column, opp_king.row, piece.row)
+                elsif moving_up?
+                  check_diagonal(piece.column, opp_king.column, opp_king.row, piece.row)
+                elsif moving_left?
+                  check_diagonal(opp_king.column, piece.column, piece.row, opp_king.row)
+                else
+                  check_diagonal(piece.column, opp_king.column, piece.row, opp_king.row)
+                end
+      valid_obstruction?(squares) ? true : false
     end
 
     def moving_up?
@@ -92,7 +91,7 @@ module Pieces
           obstructable_squares.push([y, x])
         end
       end
-      return obstructable_squares
+      obstructable_squares
     end
 
     attr_accessor :game, :piece, :new_square

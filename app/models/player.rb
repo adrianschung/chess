@@ -3,7 +3,7 @@ class Player < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: %i[facebook google_oauth2]
+         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   mount_uploader :avatar, AvatarUploader
   attribute :country, :string, default: 'N/A'
 
