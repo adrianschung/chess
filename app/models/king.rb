@@ -45,9 +45,9 @@ class King < Piece
   end
 
   def castle?(new_space)
-    return false unless new_space[:column] == 2 || new_space[:column] == 6 || moves.zero?
+    return false unless new_space[:column] == (2 || 6) || moves.zero?
     rook = find_rook(new_space)
-    return false if !rook || Pieces::Obstruction.call(self, rook) || !rook.moves.zero?
+    return false unless valid_rook?(rook)
     true
   end
 
@@ -66,10 +66,15 @@ class King < Piece
   def find_rook(king_space)
     if king_space[:column] == 2
       game.pieces.where(row: row, column: 0,
-                               type: 'Rook', captured: false).first
+                        type: 'Rook', captured: false).first
     elsif king_space[:column] == 6
       game.pieces.where(row: row, column: 7,
-                               type: 'Rook', captured: false).first
+                        type: 'Rook', captured: false).first
     end
+  end
+
+  def valid_rook?(rook)
+    return false unless rook || !Pieces::Obstruction.call(self, rook) || rook.moves.zero?
+    true
   end
 end

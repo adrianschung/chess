@@ -3,7 +3,7 @@ AllCops:
     - Rakefile
     - 'db/schema.rb'
     - 'bin/*'
-    - 'config/initializes/devise.rb'
+    - 'config/initializers/devise.rb'
     - 'config/initializers/simple_form.rb'
     - 'config/initializers/simple_form_bootstrap.rb'
     - 'db/migrate/*'
