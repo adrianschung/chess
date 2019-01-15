@@ -44,9 +44,6 @@ class GamesController < ApplicationController
     elsif current_player == current_game.black_player
       current_game.update(state: 4)
       redirect_to game_path(current_game)
-    else
-      flash[:alert] = 'You are not participating in this game'
-      redirect_to games_path
     end
   end
 

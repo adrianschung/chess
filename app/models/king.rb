@@ -26,6 +26,7 @@ class King < Piece
       valid_space?(new_square)
   end
 
+  # determines if king can move out of check
   def can_move?
     king_moves = {}
     ((row - 1)..(row + 1)).each do |x|
@@ -38,6 +39,7 @@ class King < Piece
     false
   end
 
+  # prevents king from moving into check
   def valid_space?(new_space)
     opponent_pieces.each do |piece|
       return false if piece.valid_move?(new_space)
@@ -63,6 +65,7 @@ class King < Piece
     end
   end
 
+  # finds the correct rook that is castling with king
   def find_rook(king_space)
     if king_space[:column] == 2
       game.pieces.where(row: row, column: 0,

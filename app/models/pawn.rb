@@ -34,6 +34,7 @@ class Pawn < Piece
     true if moves != 0
   end
 
+  # checks for pawns that moved 2 spaces initially for en passant
   def double_moved_pawns?
     if white_player?
       game.pieces.where(type: 'Pawn', row: 4, moves: 1,
