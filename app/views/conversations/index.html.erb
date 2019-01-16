@@ -1,11 +1,11 @@
 <div id='conversation_wrapper'>
   <section class='inner'>
-  <div>
+  <div class='conversations_box  d-block p-2'>
     <h3>Conversations</h3>
     <div>
       <div>
         <% @conversations.each do |conversation| %>
-          <div class='conversation_box'>
+          <div class='convo_box'>
             <% if conversation.sender_id == current_player.id %>
               <% recipient = Player.find(conversation.recipient_id) %>
             <% else %>
@@ -17,17 +17,15 @@
       </div>
     </div>
   </div>
-  <div>
+  <div class='players_box p-2'>
     <h3>All Players</h3>
-    <div>
-      <% @players.each do |player| %>
-        <% if player.id != current_player.id %>
-          <div>
-            <%= link_to @player.playername, players_path(@player) %> <%= link_to 'Message me!', conversations_path(sender_id: current_player.id, recipient_id: player.id), method: 'post'%>
-          </div>
-        <% end %>
+    <% @players.each do |player| %>
+      <% if player.id != current_player.id %>
+        <div class='player_box m-1'>
+          <%= link_to player.playername, player_path(player) %> <%= link_to 'Message me!', conversations_path(sender_id: current_player.id, recipient_id: player.id), method: 'post'%>
+        </div>
       <% end %>
-    </div>
+    <% end %>
   </div>
   </section>
 </div>

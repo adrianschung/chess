@@ -1,8 +1,10 @@
 #conversation_wrapper {
   width: 60%;
+  height: 80%;
   margin: 6rem auto;
 
   .inner {
+    height: 100%;
     > h1 {
       text-align: center;
       margin-bottom: 3rem;
@@ -23,5 +25,23 @@
         }
       }
     }
+  }
+
+  .conversations_box {
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+    height: 45%;
+    margin-bottom: 5%;
+    overflow: auto;
+  }
+
+  .players_box{
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+    height: 45%;
+    margin-top: 5%;
+    overflow: auto;
   }
 }
