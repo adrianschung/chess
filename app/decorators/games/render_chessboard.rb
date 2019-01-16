@@ -6,6 +6,7 @@ module Games
       @pieces = pieces
     end
 
+    # builds grid with pieces to be rendered in view
     def call
       grid = []
       (0..7).each do |row|
