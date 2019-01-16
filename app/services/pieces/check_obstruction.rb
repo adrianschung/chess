@@ -16,44 +16,44 @@ module Pieces
     private
     
     def check_horizontal_squares
-      obstructable_squares = []
+      squares = []
       if moving_left?
         ((opp_king.column + 1)...piece.column).each do |x|
-          obstructable_squares.push([piece.row, x])
+          squares.push([piece.row, x])
         end
       else
         ((piece.column + 1)...opp_king.column).each do |x|
-          obstructable_squares.push([piece.row, x])
+          squares.push([piece.row, x])
         end
       end
-      return true if valid_obstruction?(obstructable_squares)
+      return true if valid_obstruction?(squares)
       false
     end
 
     def check_vertical_squares
-      obstructable_squares = []
+      squares = []
       if moving_up?
         ((opp_king.row + 1)...piece.row).each do |y|
-          obstructable_squares.push([y, piece.column])
+          squares.push([y, piece.column])
         end
       else
         ((piece.row + 1)...opp_king.row).each do |y|
-          obstructable_squares.push([y, piece.column])
+          squares.push([y, piece.column])
         end
       end
-      return true if valid_obstruction?(obstructable_squares)
+      return true if valid_obstruction?(squares)
       false
     end
 
     def check_diagonal_squares
       squares = if moving_up? && moving_left?
-                  check_diagonal(opp_king.column, piece.column, opp_king.row, piece.row)
+                  diagonal_squares(opp_king.column, piece.column, opp_king.row, piece.row)
                 elsif moving_up?
-                  check_diagonal(piece.column, opp_king.column, opp_king.row, piece.row)
+                  diagonal_squares(piece.column, opp_king.column, opp_king.row, piece.row)
                 elsif moving_left?
-                  check_diagonal(opp_king.column, piece.column, piece.row, opp_king.row)
+                  diagonal_squares(opp_king.column, piece.column, piece.row, opp_king.row)
                 else
-                  check_diagonal(piece.column, opp_king.column, piece.row, opp_king.row)
+                  diagonal_squares(piece.column, opp_king.column, piece.row, opp_king.row)
                 end
       valid_obstruction?(squares) ? true : false
     end
@@ -74,6 +74,16 @@ module Pieces
       game.pieces.where.not(player: piece.player, captured: true, type: 'King')
     end
 
+    def diagonal_squares(column1, column2, row1, row2)
+      squares = []
+      ((column1 + 1)...column2).each do |x|
+        ((row1 + 1)...row2).each do |y|
+          squares.push([y, x])
+        end
+      end
+      squares
+    end
+
     def valid_obstruction?(squares)
       squares.each do |square|
         new_square = { row: square[0], column: square[1] }
@@ -82,16 +92,6 @@ module Pieces
         end
       end
       false
-    end
-
-    def check_diagonal(column1, column2, row1, row2)
-      obstructable_squares = []
-      ((column1 + 1)...column2).each do |x|
-        ((row1 + 1)...row2).each do |y|
-          obstructable_squares.push([y, x])
-        end
-      end
-      obstructable_squares
     end
 
     attr_accessor :game, :piece, :new_square
