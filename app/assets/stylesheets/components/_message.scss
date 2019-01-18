@@ -1,0 +1,29 @@
+#messages_index {
+  width: 60%;
+  height: 80%;
+  margin: 6rem auto;
+
+  .inner {
+    height: 100%;
+    > h1 {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid _palette(border);
+     }
+
+    > ul {
+      > li {
+        @include vendor('display', 'flex');
+        @include vendor('justify-content', 'space-between');
+        margin-bottom: 3rem;
+        list-style: none;
+
+        > form {
+          margin-bottom: 0;
+          margin-top: auto;
+        }
+      }
+    }
+  }
+}

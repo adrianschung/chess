@@ -1,31 +1,31 @@
 <div id='conversation_wrapper'>
   <section class='inner'>
-  <div class='conversations_box  d-block p-2'>
-    <h3>Conversations</h3>
-    <div>
+    <div class='conversations_box  d-block p-2'>
+      <h3>Conversations</h3>
       <div>
-        <% @conversations.each do |conversation| %>
-          <div class='convo_box'>
-            <% if conversation.sender_id == current_player.id %>
-              <% recipient = Player.find(conversation.recipient_id) %>
-            <% else %>
-              <% recipient = Player.find(conversation.sender_id) %>
-            <% end %>
-            <%= link_to recipient.first_name, conversation_messages_path(conversation) %>
-          </div>
-        <% end %>
+        <div>
+          <% @conversations.each do |conversation| %>
+            <div class='convo_box'>
+              <% if conversation.sender_id == current_player.id %>
+                <% recipient = Player.find(conversation.recipient_id) %>
+              <% else %>
+                <% recipient = Player.find(conversation.sender_id) %>
+              <% end %>
+              <%= link_to recipient.first_name, conversation_messages_path(conversation) %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
-  <div class='players_box p-2'>
-    <h3>All Players</h3>
-    <% @players.each do |player| %>
-      <% if player.id != current_player.id %>
-        <div class='player_box m-1'>
-          <%= link_to player.playername, player_path(player) %> <%= link_to 'Message me!', conversations_path(sender_id: current_player.id, recipient_id: player.id), method: 'post'%>
-        </div>
+    <div class='players_box p-2'>
+      <h3>All Players</h3>
+      <% @players.each do |player| %>
+        <% if player.id != current_player.id %>
+          <div class='player_box m-1'>
+            <%= link_to player.playername, player_path(player) %> <%= link_to 'Message me!', conversations_path(sender_id: current_player.id, recipient_id: player.id), method: 'post'%>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
   </section>
 </div>
