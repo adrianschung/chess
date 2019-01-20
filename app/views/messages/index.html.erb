@@ -9,7 +9,7 @@
           <% player = Player.find(message.player_id) %>
           <div class='item'>
             <div class='content'>
-              <div class='header'><strong><%= player.playername %></strong> <%= message.message_time %></div>
+              <div class='header'><strong><%= link_to player.playername, player_path(player) %></strong> <%= message.message_time %></div>
               <div class='list'>
                 <div class='item'>
                   <i class='right triangle icon'></i>
