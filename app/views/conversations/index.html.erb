@@ -11,7 +11,7 @@
               <% else %>
                 <% recipient = Player.find(conversation.sender_id) %>
               <% end %>
-              <%= link_to recipient.first_name, conversation_messages_path(conversation) %>
+              <%= link_to recipient.playername, conversation_messages_path(conversation) %>
             </div>
           <% end %>
         </div>
