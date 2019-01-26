@@ -7,9 +7,9 @@
     <header>
       <nav id='primary_navigation'>
         <% if player_signed_in? %>
-          <%= link_to 'Join Game', games_path %>
-          <%= link_to 'Create Game', new_game_path, method: :get %>
-          <%= link_to 'Sign Out', destroy_player_session_path, method: :delete %>
+          <%= link_to 'Join Game', games_path, class: 'button' %>
+          <%= link_to 'Create Game', new_game_path, method: :get, class: 'button' %>
+          <%= link_to 'Sign Out', destroy_player_session_path, method: :delete, class: 'button primary' %>
         <% else %>
           <%= link_to 'Sign up', new_player_registration_path, class: 'button primary' %>
           <%= link_to 'Log in', new_player_session_path, class: 'button' %>
