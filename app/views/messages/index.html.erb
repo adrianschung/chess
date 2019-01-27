@@ -8,7 +8,7 @@
         <% if message.body %>
           <% player = Player.find(message.player_id) %> 
           <div class='item'>
-            <div class="message <%= player == current_player ? 'sent' : 'received' %>">
+            <div class="<%= player == current_player ? 'message-sent' : 'message-received' %>">
               <div class='header'><strong><%= link_to player.playername, player_path(player) %></strong> <%= message.message_time %></div>
               <div class='list'>
                 <div class='item'>

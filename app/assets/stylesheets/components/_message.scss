@@ -27,14 +27,21 @@
     }
   }
 
-  .message {
-  background: #ffffff;
-  border-radius: .4em;
-  color: #000000;
-  position: relative;
+  .message-sent {
+    background: #ffffff;
+    border-radius: .4em;
+    color: #000000;
+    position: relative;
   }
 
-  .sent:after {
+  .message-received {
+    background: #80ff80;
+    border-radius: .4em;
+    color: #000000;
+    position: relative;
+  }
+
+  .message-sent:after {
     content: '';
     position: absolute;
     right: 0;
@@ -49,7 +56,7 @@
     margin-right: -20px;
   }
 
-  .received:after {
+  .message-received:after {
     content: '';
     position: absolute;
     left: 0;
