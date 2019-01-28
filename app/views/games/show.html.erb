@@ -41,14 +41,6 @@
 
 <script type='text/javascript'>
 	$(()=>{
-		$('.castle').click((e)=>{
-			$.ajax({
-				type: 'PUT',
-				url: $(e.target).data('url'),
-				data: { direction: $(e.target).data('direction') }
-			});
-		})
-
 		let droppable = (url) => {
 			$( ".droppable" ).droppable({
 				drop: (e)=>{
