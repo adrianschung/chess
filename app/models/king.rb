@@ -39,6 +39,8 @@ class King < Piece
     false
   end
 
+  private
+  
   # prevents king from moving into check
   def valid_space?(new_space)
     opponent_pieces.each do |piece|

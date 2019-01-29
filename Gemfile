@@ -65,6 +65,7 @@ end
 gem 'bootstrap', '~> 4.1.1'
 gem 'carrierwave', '~> 1.0'
 gem 'devise'
+gem 'fog-aws'
 gem 'jquery-ui-rails'
 gem 'mini_magick'
 gem 'omniauth-facebook'
