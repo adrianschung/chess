@@ -156,6 +156,7 @@
 		}
 
 		&.spotlight {
+			opacity: 0;
 			@include wrapper-edges-color(_palette(accent));
 			background-color: _palette(accent);
 			text-align: right;

@@ -122,3 +122,15 @@
 			</ul>
 		</div>
 	</section>
+
+  <script>
+    $(window).scroll(function(){
+      $('.spotlight').each(function(i){
+        var object_coordinate = $(this).offset().top;
+        var bottom_of_window = $(window).scrollTop() + $(window).height();
+        if (bottom_of_window > object_coordinate) {
+          $(this).animate({opacity: 1}, 500)
+        }
+      })
+    })
+  </script>
