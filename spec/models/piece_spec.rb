@@ -38,14 +38,14 @@ RSpec.describe Piece, type: :model do
       expect(obstruction).to eq(true)
     end
 
-    it 'Should detect diagnol obstructions down and right' do
+    it 'Should detect diagonal obstructions down and right' do
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
       FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1)
       obstruction = Pieces::Obstruction.call(piece_start, column: 3, row: 3)
       expect(obstruction).to eq(true)
     end
 
-    it 'Should detect diagnol obstructions up and right' do
+    it 'Should detect diagonal obstructions up and right' do
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 3, player: player1)
       FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1)
       obstruction = Pieces::Obstruction.call(piece_start, column: 3, row: 1)
@@ -75,9 +75,6 @@ RSpec.describe Piece, type: :model do
     end
 
     it 'Should move to new location and capture opponents piece' do
-      player1 = FactoryBot.create(:player, playername: 'Wayne')
-      player2 = FactoryBot.create(:player, playername: 'Ricky')
-      game = FactoryBot.create(:game, white_player: player1, black_player: player2)
       piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
       piece_end = FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player2)
       piece_start.move_to!(row: piece_end.row, column: piece_end.column)
