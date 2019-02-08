@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
   describe 'Player tries to move piece' do
-    player1 = FactoryBot.create(:player, playername: 'Wayne')
-    game = FactoryBot.create(:game, white_player: player1)
+    before(:each) do
+      player1 = FactoryBot.create(:player, playername: 'Wayne')
+      game = FactoryBot.create(:game, white_player: player1)
+    end
 
     it 'will move if the piece is in bounds' do
       piece = FactoryBot.create(:piece, game: game, player: player1)
@@ -28,34 +30,33 @@ RSpec.describe Piece, type: :model do
   end
 
   describe 'A piece checks for obstructions' do
-    player1 = FactoryBot.create(:player, playername: 'Wayne')
-    game = FactoryBot.create(:game, white_player: player1)
+    before(:each) do
+      @player1 = FactoryBot.create(:player, playername: 'Wayne')
+      @game = FactoryBot.create(:game, white_player: @player1)
+      @piece = FactoryBot.create(:piece, game: @game, column: 2, row: 2, player: @player1)
+    end
 
     it 'Should detect vertical obstructions' do
-      piece_start = FactoryBot.create(:piece, game: game, column: 2, row: 1, player: player1)
-      FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1)
-      obstruction = Pieces::Obstruction.call(piece_start, column: 2, row: 3)
+      FactoryBot.create(:piece, game: @game, column: 2, row: 3, player: @player1)
+      obstruction = Pieces::Obstruction.call(@piece, column: 2, row: 4)
       expect(obstruction).to eq(true)
     end
 
     it 'Should detect diagonal obstructions down and right' do
-      piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
-      FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1)
-      obstruction = Pieces::Obstruction.call(piece_start, column: 3, row: 3)
+      FactoryBot.create(:piece, game: @game, column: 3, row: 3, player: @player1)
+      obstruction = Pieces::Obstruction.call(@piece, column: 4, row: 4)
       expect(obstruction).to eq(true)
     end
 
     it 'Should detect diagonal obstructions up and right' do
-      piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 3, player: player1)
-      FactoryBot.create(:piece, game: game, column: 2, row: 2, player: player1)
-      obstruction = Pieces::Obstruction.call(piece_start, column: 3, row: 1)
+      FactoryBot.create(:piece, game: @game, column: 1, row: 1, player: @player1)
+      obstruction = Pieces::Obstruction.call(@piece, column: 0, row: 0)
       expect(obstruction).to eq(true)
     end
 
     it 'Should detect horizontal obstructions' do
-      piece_start = FactoryBot.create(:piece, game: game, column: 1, row: 1, player: player1)
-      FactoryBot.create(:piece, game: game, column: 2, row: 1, player: player1)
-      obstruction = Pieces::Obstruction.call(piece_start, column: 3, row: 1)
+      FactoryBot.create(:piece, game: @game, column: 3, row: 2, player: @player1)
+      obstruction = Pieces::Obstruction.call(@piece, column: 4, row: 2)
       expect(obstruction).to eq(true)
     end
   end
