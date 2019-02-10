@@ -88,7 +88,8 @@ RSpec.describe Game, type: :model do
                                 type: 'Rook', game: @game)
       FactoryBot.create(:piece, player: @black_player, row: 1, column: 7,
                                 type: 'Rook', game: @game)
-      expect(@game.checkmate?(@white_player)).to eq(true)
+      @game.check_endgame(@white_player)
+      expect(@game.state).to eq("Black Won")
     end
 
     it 'will determine if piece causing check can be blocked horizontally' do
@@ -98,7 +99,8 @@ RSpec.describe Game, type: :model do
                                 type: 'Rook', game: @game)
       FactoryBot.create(:piece, player: @black_player, row: 0, column: 7,
                                 type: 'Rook', game: @game)
-      expect(@game.checkmate?(@white_player)).to eq(false)
+      @game.check_endgame(@white_player)
+      expect(@game.state).to eq("White's Turn")
     end
 
     it 'will determine if a piece causing check can be blocked vertically' do
@@ -108,7 +110,8 @@ RSpec.describe Game, type: :model do
                                 type: 'Rook', game: @game)
       FactoryBot.create(:piece, player: @black_player, row: 7, column: 0,
                                 type: 'Rook', game: @game)
-      expect(@game.checkmate?(@white_player)).to eq(false)
+      @game.check_endgame(@white_player)
+      expect(@game.state).to eq("White's Turn")
     end
 
     it' will determine if a piece causing check can be blocked diagonally' do
@@ -118,7 +121,8 @@ RSpec.describe Game, type: :model do
                                 type: 'Rook', game: @game)
       FactoryBot.create(:piece, player: @black_player, row: 7, column: 7,
                                 type: 'Bishop', game: @game)
-      expect(@game.checkmate?(@white_player)).to eq(false)
+      @game.check_endgame(@white_player)
+      expect(@game.state).to eq("White's Turn")
     end
   end
 end

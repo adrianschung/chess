@@ -38,27 +38,33 @@ class Game < ApplicationRecord
     false
   end
 
-  def checkmate?(player)
-    return false unless check?(player) && endgame?(player)
-    true
+  def check_endgame(player)
+    check?(player) ? checkmate(player) : stalemate(player)
   end
 
-  def stalemate(player)
-    return false if check?(player) || !endgame?(player)
-    update(state: 5)
-  end
 
   protected
 
-  def endgame?(player)
+  def checkmate(player)
+    return unless check?(player) && king_trapped?(player)
+    player == white_player ? update(state: 3) : update(state: 4)
+  end
+
+  def stalemate(player)
+    return if check?(player) || !king_trapped?(player)
+    update(state: 5)
+  end
+
+  def king_trapped?(player)
+    # Check if the game is in a stalemate or checkmate scenario
     king = pieces.where(player: player, type: 'King', captured: false).first
+    return false if king.can_move?
     opponent_pieces = pieces.where.not(player: player, captured: true)
     check_piece = nil
     opponent_pieces.each do |piece|
       check_piece = piece if piece.valid_move?(row: king.row, column: king.column)
     end
     return false if check_piece.can_obstruct? || check_piece.can_capture?
-    return false if king.can_move?
     true
   end
 end
