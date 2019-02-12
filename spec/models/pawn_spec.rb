@@ -179,19 +179,48 @@ RSpec.describe Pawn, type: :model do
         it 'by moving 2 rows' do
           w_player = FactoryBot.create(:player, playername: 'Wayne')
           b_player = FactoryBot.create(:player, playername: 'John')
-          game = FactoryBot.create(
-            :game,
-            white_player: w_player,
-            black_player: b_player
-          )
+          game = FactoryBot.create(:game,
+                                   white_player: w_player,
+                                   black_player: b_player)
           pawn = FactoryBot.create(:pawn, game: game, player: b_player)
-
           pawn.move_to!(row: 6, column: 1)
           pawn.move_to!(row: 4, column: 1)
           expect(pawn.row).to eq(6)
           expect(pawn.column).to eq(1)
         end
       end
+    end
+
+    it 'should promote correctly for white player' do
+      w_player = FactoryBot.create(:player, playername: 'Wayne')
+      b_player = FactoryBot.create(:player, playername: 'John')
+      game = FactoryBot.create(:game,
+                               white_player: w_player,
+                               black_player: b_player)
+      pawn = FactoryBot.create(:pawn,
+                               game: game, 
+                               player: w_player,
+                               row: 6,
+                               column: 0)
+      pawn.move_to!(row: 7, column: 0)
+      expect(pawn.row).to eq(7)
+      expect(pawn.type). to eq('Queen')
+    end
+
+    it 'should promote correctly for black player' do
+      w_player = FactoryBot.create(:player, playername: 'Wayne')
+      b_player = FactoryBot.create(:player, playername: 'John')
+      game = FactoryBot.create(:game,
+                               white_player: w_player,
+                               black_player: b_player)
+      pawn = FactoryBot.create(:pawn,
+                               game: game,
+                               player: b_player,
+                               row: 1,
+                               column: 0)
+      pawn.move_to!(row: 0, column: 0)
+      expect(pawn.row).to eq(0)
+      expect(pawn.type). to eq('Queen')
     end
   end
 end
