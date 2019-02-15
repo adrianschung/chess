@@ -3,7 +3,7 @@ class PiecesController < ApplicationController
     # stops opponent from moving current players pieces, keep commented for local testing.
     return redirect_to game_path(game) unless current_player == current_piece.player
     current_piece.move_to!(new_square_params)
-    flash[:notice] = "#{@piece.player.playername} is in check" if game.check?(current_piece.player)
+    flash[:notice] = "#{current_piece.player.playername} is in check" if game.check?(current_piece.player)
     game.check_endgame(current_piece.player)
     redirect_to game_path(game)
   end
