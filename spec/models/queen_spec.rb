@@ -8,11 +8,11 @@ RSpec.describe Queen, type: :model do
       @w_player = FactoryBot.create(:player, playername: 'Wayne')
       @b_player = FactoryBot.create(:player, playername: 'John')
       @game = FactoryBot.create(:game,
-                               black_player: @b_player,
-                               white_player: @w_player)
+                                black_player: @b_player,
+                                white_player: @w_player)
       @queen = FactoryBot.create(:queen,
-                                game: @game,
-                                player: @b_player)
+                                 game: @game,
+                                 player: @b_player)
     end
 
     it 'multiple rows forward' do
@@ -25,7 +25,7 @@ RSpec.describe Queen, type: :model do
       @queen.move_to!(row: 0, column: 7)
       expect(@queen.row).to eq(0)
       expect(@queen.column).to eq(7)
-      end
+    end
 
     it 'multiple squares diagonally' do
       @queen.move_to!(row: 3, column: 7)

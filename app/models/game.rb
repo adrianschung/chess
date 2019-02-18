@@ -42,7 +42,6 @@ class Game < ApplicationRecord
     check?(player) ? checkmate(player) : stalemate(player)
   end
 
-
   protected
 
   def checkmate(player)

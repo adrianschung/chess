@@ -14,7 +14,7 @@ module Pieces
     end
 
     private
-    
+
     def check_horizontal_squares
       squares = []
       if moving_left?

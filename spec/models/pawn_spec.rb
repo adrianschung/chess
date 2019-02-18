@@ -56,12 +56,12 @@ RSpec.describe Pawn, type: :model do
         b_player = FactoryBot.create(:player, playername: 'John')
         game = FactoryBot.create(:game,
                                  white_player: w_player,
-                                 black_player: b_player
+                                 black_player: b_player)
         pawn = FactoryBot.create(:pawn,
                                  game: game,
                                  player: b_player,
                                  row: 3,
-                                 column: 3
+                                 column: 3)
         white_pawn = FactoryBot.create(:pawn,
                                        game: game,
                                        row: 3,
@@ -91,8 +91,6 @@ RSpec.describe Pawn, type: :model do
     end
 
     context 'in an invalid direction' do
-      before(:each) do
-
       it 'by moving backwards' do
         w_player = FactoryBot.create(:player, playername: 'Wayne')
         b_player = FactoryBot.create(:player, playername: 'John')
@@ -158,7 +156,7 @@ RSpec.describe Pawn, type: :model do
                                white_player: w_player,
                                black_player: b_player)
       pawn = FactoryBot.create(:pawn,
-                               game: game, 
+                               game: game,
                                player: w_player,
                                row: 6,
                                column: 0)

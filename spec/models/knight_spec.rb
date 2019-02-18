@@ -8,12 +8,12 @@ RSpec.describe Knight, type: :model do
       @w_player = FactoryBot.create(:player, playername: 'Wayne')
       @b_player = FactoryBot.create(:player, playername: 'John')
       @game = FactoryBot.create(:game,
-                               black_player: @b_player,
-                               white_player: @w_player)
+                                black_player: @b_player,
+                                white_player: @w_player)
       @knight = FactoryBot.create(:knight,
-                                 game: @game,
-                                 player: @b_player)
-      end
+                                  game: @game,
+                                  player: @b_player)
+    end
 
     context 'in a valid direction' do
       it '2 rows forward, 1 column right' do

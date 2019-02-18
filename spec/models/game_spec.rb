@@ -14,14 +14,10 @@ RSpec.describe Game, type: :model do
     it 'should add 16 white and 16 black pieces to the board' do
       white_player = FactoryBot.create(:player, playername: 'Wayne')
       black_player = FactoryBot.create(:player, playername: 'John')
-      game = FactoryBot.create(
-        :game,
-        white_player: white_player,
-        black_player: black_player
-      )
-
+      game = FactoryBot.create(:game,
+                               white_player: white_player,
+                               black_player: black_player)
       game.add_pieces_to_board
-
       white_pieces = game.white_player.pieces
       black_pieces = game.black_player.pieces
       expect(white_pieces.count).to eq(16)
@@ -63,8 +59,10 @@ RSpec.describe Game, type: :model do
     before(:each) do
       @white_player = FactoryBot.create(:player)
       @black_player = FactoryBot.create(:player)
-      @game = FactoryBot.create(:game, state: 1, white_player: @white_player,
-                                      black_player: @black_player)
+      @game = FactoryBot.create(:game,
+                                state: 1,
+                                white_player: @white_player,
+                                black_player: @black_player)
     end
 
     it 'will determine if king is in check' do
@@ -89,7 +87,7 @@ RSpec.describe Game, type: :model do
       FactoryBot.create(:piece, player: @black_player, row: 1, column: 7,
                                 type: 'Rook', game: @game)
       @game.check_endgame(@white_player)
-      expect(@game.state).to eq("Black Won")
+      expect(@game.state).to eq('Black Won')
     end
 
     it 'will determine if piece causing check can be blocked horizontally' do

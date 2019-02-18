@@ -6,7 +6,9 @@ class Player < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   mount_uploader :avatar, AvatarUploader
-  validates_format_of :playername, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+  validates_format_of :playername, with: /^[a-zA-Z0-9_\.]*$/, multiline: true
+  has_many :games
+  has_many :pieces
 
   def games
     Game.where(white_player_id: self).or(Game.where(black_player_id: self))
@@ -35,7 +37,7 @@ class Player < ApplicationRecord
   end
 
   def login
-    @login || self.playername || self.email
+    @login || playername || email
   end
 
   def self.from_omniauth(auth)
@@ -48,14 +50,8 @@ class Player < ApplicationRecord
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      where(conditions.to_hash).where(["lower(playername) = :value OR lower(email) = :value", { :value => login.downcase }]).first
-    elsif conditions.has_key?(:playername) || conditions.has_key?(:email)
-      conditions[:email].downcase! if conditions[:email]
-      where(conditions.to_hash).first
-    end
+    login = conditions.delete(:login)
+    where(conditions).where(['lower(username) = :value OR lower(email) = :value',
+                             { value: login.strip.downcase }]).first
   end
-
-  has_many :games
-  has_many :pieces
 end
