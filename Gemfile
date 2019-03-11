@@ -62,7 +62,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
 end
 
-gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap', '~> 4.3.1'
 gem 'carrierwave', '~> 1.0'
 gem 'devise'
 gem 'fog-aws'
