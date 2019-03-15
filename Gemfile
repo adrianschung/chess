@@ -42,9 +42,9 @@ group :development, :test do
   gem 'awesome_print'
   gem 'byebug', platform: :mri
   gem 'capybara'
-  gem 'chromedriver-helper'
+  gem 'chromedriver-helper', '1.2.0'
   gem 'database_cleaner'
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '~> 4.10.0'
   gem 'figaro'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'pry'

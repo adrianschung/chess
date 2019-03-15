@@ -32,9 +32,7 @@ class Game < ApplicationRecord
     king = pieces.where(player: player, type: 'King', captured: false).first
     return false if king.nil?
     opponent_pieces = pieces.where.not(player: player, captured: true)
-    opponent_pieces.each do |piece|
-      return true if piece.valid_move?(row: king.row, column: king.column)
-    end
+    return true if find_check(opponent_pieces, king)
     false
   end
 
@@ -60,10 +58,15 @@ class Game < ApplicationRecord
     return false if king.can_move?
     opponent_pieces = pieces.where.not(player: player, captured: true)
     check_piece = nil
-    opponent_pieces.each do |piece|
-      check_piece = piece if piece.valid_move?(row: king.row, column: king.column)
-    end
+    check_piece = find_check(opponent_pieces, king)
     return false if check_piece.can_obstruct? || check_piece.can_capture?
     true
+  end
+
+  def find_check(pieces, king)
+    pieces.each do |piece|
+      return piece if piece.valid_move?(row: king.row, column: king.column)
+    end
+    false
   end
 end
