@@ -1,10 +1,10 @@
 .game_wrapper {
   width: 85vh;
   max-width: 85vw;
-  margin: 6rem auto 3rem auto;
+  margin: 6rem auto auto auto;
 
-  ul {
-    border-left: 1px solid white;
+  h4 {
+    margin: 5px;
   }
 
   li {
@@ -14,8 +14,27 @@
   span {
     text-transform: capitalize;
   }
+
+  ul {
+    margin: auto;
+    padding-left: 0px;
+  }
 }
 
-#game_state {
+.forfeit {
+  margin-bottom: 0px;
+}
+
+.game-title {
   text-align: center;
+}
+
+.info-box {
+  margin: auto;
+  margin-bottom: 10px;
+  width: 30vw;
+}
+
+.inner {
+  margin-top: -60px;
 }
