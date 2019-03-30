@@ -10,7 +10,7 @@
       margin-bottom: 3rem;
       padding-bottom: 1rem;
       border-bottom: 1px solid _palette(border);
-     }
+    }
 
     > ul {
       > li {
@@ -29,15 +29,15 @@
 
   .message-sent {
     background: #ffffff;
-    border-radius: .4em;
+    border-radius: 0.4em;
     color: #000000;
     position: relative;
   }
 
   .message-received {
     background: #80ff80;
-    border-radius: .4em;
-    color: #00000;
+    border-radius: 0.4em;
+    color: #000000;
     position: relative;
   }
 
