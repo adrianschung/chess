@@ -17,7 +17,7 @@
 					<tr>
 						<% row.each_with_index do |piece, x| %>
 							<td  data-row=<%= y %> data-column=<%= x %>
-								class=<%= (!piece.nil? && Pieces::Disabled.call(piece)) ? 'draggable' : 'droppable' %> >
+								class=<%= set_class(piece) %> >
 								<div>
 									<% if !piece.nil? %>
 										<%= image_tag piece.picture,
