@@ -1,7 +1,7 @@
-Hello <% @player.playername %>,
+Hello <%= @player.playername %>,
 
 This is a message from Chess Senders.
-<% @sender.playername %> has sent you a message!
-Click the link to see the conversation: <% link_to 'here', conversation_messages_url(@conversation) %>
+<%= @sender.playername %> has sent you a message!
+Click the link to see the conversation: <%= link_to 'here', conversation_messages_url(@conversation) %>
 
 Thanks for playing and have a great day!

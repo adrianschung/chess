@@ -20,6 +20,6 @@ class PlayerMailer < ApplicationMailer
     end
     @sender = message.player
     mail(to: @player.email,
-         subject: 'A player has sent you an message')
+         subject: 'A player has sent you a message')
   end
 end
