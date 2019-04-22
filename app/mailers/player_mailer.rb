@@ -11,11 +11,13 @@ class PlayerMailer < ApplicationMailer
 
   def message_sent(message)
     @conversation = message.conversation
-    @player = if message.player == @conversation.sender
-                @conversation.recipient
-              else
-                @conversation.sender
-              end
+    if message.player == @conversation.sender
+      @player = @conversation.recipient
+      @sender = @conversation.sender
+    else
+      @player = @conversation.sender
+      @sender = @conversation.recipient
+    end
     @sender = message.player
     mail(to: @player.email,
          subject: 'A player has sent you an message')

@@ -7,7 +7,7 @@
     <h1>Hello <% @player.playername %>,</h1>
     <p>
       This is a message from Chess Senders.
-      <% @opponent.playername %> has sent you a message!
+      <% @sender.playername %> has sent you a message!
     </p>
     <p>
       Click the link to see the conversation: <% link_to 'here', conversation_messages_path(@conversation) %><br>
