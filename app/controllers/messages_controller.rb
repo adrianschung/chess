@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
     @message = @conversation.messages.new(message_params)
     if @message.save
       redirect_to conversation_messages_path(@conversation)
-      PlayerMailer.message_sent(@message).deliver_now
+      PlayerMailer.message_sent(@message).deliver_later
     else
       render :new, status: :unprocessable_entity
     end

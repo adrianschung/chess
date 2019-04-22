@@ -11,7 +11,7 @@
 				<%= button_to 'Forfeit', game_forfeit_path(current_game), :method=> :put, :form_class => 'forfeit' %>
 			</ul>
 		</div>
-		<div class='game-box'>
+		<div class='game-box' data-channel-subscribe="game" data-room-id="<%= current_game.id %>">
 			<table class='chessboard'>
 				<% @chess_board.each_with_index do |row, y| %>
 					<tr>
