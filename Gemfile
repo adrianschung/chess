@@ -71,7 +71,7 @@ gem 'mini_magick'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'simple_form'
-gem 'redis'
+gem 'redis', '~>3.2'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?

@@ -1,11 +1,10 @@
 class PiecesController < ApplicationController
+
   def update
-    # stops opponent from moving current players pieces, keep commented for local testing.
-    # return redirect_to game_path(game) unless current_player == piece_player
     current_piece.move_to!(new_square_params)
     flash[:notice] = "#{piece_player.playername} is in check" if game.check?(piece_player)
     game.check_endgame(current_piece.player)
-    # GameChannel.broadcast_to(game, current_piece)
+    GameChannel.broadcast_to(game, game_json)
   end
 
   private
@@ -25,6 +24,11 @@ class PiecesController < ApplicationController
 
   def game
     @game = current_piece.game
+  end
+
+  def game_json
+    game.to_json(:include => { :pieces => { 
+                               :only => [:row, :column, :type, :player_id] }})
   end
 
   def piece_player
