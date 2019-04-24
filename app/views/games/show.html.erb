@@ -1,4 +1,4 @@
-<div id="game" class='game_wrapper'>
+<div id='game' class='game_wrapper'>
 	<section class='inner'>
 		<h1 class='game-title'><%= current_game.name %></h1>
 		<div class='info-box'>
@@ -7,34 +7,12 @@
 				<li><h4><span>Date Created: </span><%= current_game.created_at.strftime("%b %d, %Y") %></h4></li>
 				<li><h4><span>White Player: </span><%= current_game.white_player.playername %></h4></li>
 				<li><h4><span>Black Player: </span><%= current_game.black_player ? current_game.black_player.playername : 'Waiting for player' %></h4></li>
-				<li><h4><span>Current State: </span><%= current_game.state %></h4></li>
+				<li><h4><span>Current State: </span><div id="state" style="display:inline-block"><%= current_game.state %></div></h4></li>
 				<%= button_to 'Forfeit', game_forfeit_path(current_game), :method=> :put, :form_class => 'forfeit' %>
 			</ul>
 		</div>
 		<div class='game-box' data-channel-subscribe="game" data-game-id="<%= current_game.id %>">
-			<table class='chessboard'>
-				<% @chess_board.each_with_index do |row, y| %>
-					<tr>
-						<% row.each_with_index do |piece, x| %>
-							<td  data-row=<%= y %> data-column=<%= x %>
-								class=<%= set_class(piece) %> >
-								<div>
-									<% if !piece.nil? %>
-										<%= image_tag piece.picture,
-										class: "piece",
-										data: {
-				              row: y,
-				              column: x,
-				              url: piece_path(piece)
-				            }
-										%>
-									<% end %>
-								</div>
-			        </td>
-						<% end %>
-					</tr>
-				<% end %>
-			</table>
+			<%= render partial: 'chessboard', locals: { chess_board: @chess_board} %>
 		</div>
 	</section>
 </div>

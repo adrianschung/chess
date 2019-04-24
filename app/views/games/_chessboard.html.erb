@@ -1,0 +1,21 @@
+<table class='chessboard'>
+  <% chess_board.each_with_index do |row, y| %>
+    <tr>
+      <% row.each_with_index do |piece, x| %>
+        <td data-row=<%= y %> data-column=<%= x %>
+          class=<%= set_class(piece) %> >
+            <% if !piece.nil? %>
+              <%= image_tag piece.picture,
+              class: 'piece',
+              data: {
+                row: y,
+                column: x,
+                url: piece_path(piece)
+              }
+              %>
+            <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

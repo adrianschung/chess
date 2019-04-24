@@ -27,8 +27,9 @@ class PiecesController < ApplicationController
   end
 
   def game_json
-    game.to_json(:include => { :pieces => { 
-                               :only => [:row, :column, :type, :player_id] }})
+    game.as_json(include: { pieces: { 
+                              only: [:id, :row, :column, :player_id, :picture]  }},
+                    only: :state)
   end
 
   def piece_player

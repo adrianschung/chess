@@ -1,0 +1,46 @@
+$(function() {
+  $('[data-channel-subscribe="game"]').each(function(index, element) {
+    var $element = $(element),
+      game_id = $element.data('game-id'),
+      row = 1,
+      column = 1;
+
+    App.cable.subscriptions.create(
+      {
+        channel: 'GameChannel',
+        id: game_id,
+      },
+      {
+        received: function(data) {
+          $('#state').text(data.state);
+        },
+      }
+    );
+
+    function updateChessboard(data) {
+      for (var column = 0; column <= 7; column++) {
+        for (var row = 0; row <= 7; row++) {
+          if (findPiece(data, row, column)) {
+            piece = findPiece(data, row, column);
+            $('td[data-row="' + row + '"][data-column="' + column + '"]').addClass(".draggable");
+          }
+        }
+      }
+    }
+
+    function findPiece(game, row, column) {
+      return game.pieces.find(piece => {
+        return piece.row === row && piece.column === column;
+        return null;
+      });
+    }
+
+    function addPiece(piece) {
+      var row = piece.row,
+        column = piece.column,
+        url = '/pieces/' + piece.id;
+        image = '/assets/' + piece.picture;
+        return '<img class="piece" data-row="'
+    }
+  });
+});
