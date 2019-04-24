@@ -15,6 +15,8 @@ $(() => {
   };
 
   $('.draggable .piece').draggable({
+    revert: 'invalid',
+    revertDuration: 200,
     drag: e => {
       droppable($(e.target).data('url'));
     },
