@@ -12,35 +12,40 @@ $(function() {
       },
       {
         received: function(data) {
-          $('#state').text(data.state);
+
+          updateView(setPieces);
+
+          function updateView(callback) {
+            $('#game-box').html(data.view);
+            callback();
+          };
+
+          function setPieces() {
+            let droppable = url => {
+              $('.droppable').droppable({
+                drop: e => {
+                  $.ajax({
+                    type: 'PUT',
+                    url: url,
+                    data: {
+                      row: $(e.target).data('row'),
+                      column: $(e.target).data('column'),
+                    },
+                  });
+                },
+              });
+            };
+
+            $('.draggable .piece').draggable({
+              revert: 'invalid',
+              revertDuration: 200,
+              drag: e => {
+                droppable($(e.target).data('url'));
+              },
+            });
+          }
         },
       }
     );
-
-    function updateChessboard(data) {
-      for (var column = 0; column <= 7; column++) {
-        for (var row = 0; row <= 7; row++) {
-          if (findPiece(data, row, column)) {
-            piece = findPiece(data, row, column);
-            $('td[data-row="' + row + '"][data-column="' + column + '"]').addClass(".draggable");
-          }
-        }
-      }
-    }
-
-    function findPiece(game, row, column) {
-      return game.pieces.find(piece => {
-        return piece.row === row && piece.column === column;
-        return null;
-      });
-    }
-
-    function addPiece(piece) {
-      var row = piece.row,
-        column = piece.column,
-        url = '/pieces/' + piece.id;
-        image = '/assets/' + piece.picture;
-        return '<img class="piece" data-row="'
-    }
   });
 });

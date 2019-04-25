@@ -11,7 +11,7 @@
 				<%= button_to 'Forfeit', game_forfeit_path(current_game), :method=> :put, :form_class => 'forfeit' %>
 			</ul>
 		</div>
-		<div class='game-box' data-channel-subscribe="game" data-game-id="<%= current_game.id %>">
+		<div id='game-box' class='game-box' data-channel-subscribe="game" data-game-id="<%= current_game.id %>">
 			<%= render partial: 'chessboard', locals: { chess_board: @chess_board} %>
 		</div>
 	</section>
