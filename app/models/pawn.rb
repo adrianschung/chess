@@ -24,7 +24,6 @@ class Pawn < Piece
       elsif valid_en_passant_move?(new_square)
         Pieces::EnPassant.call(self, new_square)
       end
-      Games::UpdateState.call(game)
     end
   end
 

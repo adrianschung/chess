@@ -13,6 +13,7 @@ module Pieces
                                     moves: 1).where.not(player_id: piece.player_id).first
       new_piece.update_attributes(column: nil, row: nil, captured: true)
       piece.update_attributes(column: new_square[:column], row: new_square[:row])
+      Games::UpdateState.call(game)
     end
 
     private

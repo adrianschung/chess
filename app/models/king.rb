@@ -10,7 +10,6 @@ class King < Piece
     transaction do
       if valid_move?(new_square)
         Pieces::MoveTo.call(self, new_square)
-        Games::UpdateState.call(game)
       elsif castle?(new_square)
         castle_move(new_square)
         Games::UpdateState.call(game)

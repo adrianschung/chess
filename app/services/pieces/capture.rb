@@ -11,6 +11,7 @@ module Pieces
       return false if new_piece.player_id == piece.player_id
       piece.update_attributes(column: square[:column], row: square[:row])
       new_piece.update_attributes(row: nil, column: nil, captured: true)
+      Games::UpdateState.call(game)
     end
 
     private
