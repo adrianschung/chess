@@ -31,6 +31,10 @@ class GamesController < ApplicationController
       current_game.update(black_player: current_player, state: 1)
       PlayerMailer.game_joined(current_game).deliver_later
       current_game.add_pieces_to_board
+      ActionCable.server.broadcast("room_#{current_game.id}", view: ApplicationController.render(
+                                    partial: 'games/chessboard',
+                                    locals: { chess_board: board } )
+                            )
       redirect_to game_path(current_game)
     else
       render :new, status: :unprocessable_entity
@@ -56,6 +60,10 @@ class GamesController < ApplicationController
     else
       true
     end
+  end
+
+  def board
+    Games::RenderChessboard.call(current_game.pieces.where(captured: false))
   end
 
   helper_method :current_game
