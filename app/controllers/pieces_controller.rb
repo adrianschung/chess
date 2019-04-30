@@ -8,6 +8,7 @@ class PiecesController < ApplicationController
                                     partial: 'games/chessboard',
                                     locals: { chess_board: board } )
                             )
+    head :no_content
   end
 
   private
