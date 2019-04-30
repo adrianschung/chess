@@ -54,7 +54,7 @@ class GamesController < ApplicationController
   private
 
   def validate_player!
-    if current_player != current_game.white_player || current_player != current_game.black_player
+    if current_player != current_game.white_player && current_player != current_game.black_player
       flash[:alert] = 'You are not participating in this game'
       redirect_to games_path
     else

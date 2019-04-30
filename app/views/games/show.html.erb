@@ -8,7 +8,7 @@
 				<li><h4><span>White Player: </span><%= current_game.white_player.playername %></h4></li>
 				<li><h4><span>Black Player: </span><%= current_game.black_player ? current_game.black_player.playername : 'Waiting for player' %></h4></li>
 				<li><h4><span>Current State: </span><div id="state" style="display:inline-block"><%= current_game.state %></div></h4></li>
-				<%= button_to 'Forfeit', game_forfeit_path(current_game), :method=> :put, :form_class => 'forfeit' %>
+				<%= button_to 'Forfeit', forfeit_game_path(current_game), :method=> :put, :form_class => 'forfeit' %>
 			</ul>
 		</div>
 		<div id='game-box' class='game-box' data-channel-subscribe="game" data-game-id="<%= current_game.id %>">

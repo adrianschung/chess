@@ -1,5 +1,5 @@
 module Pieces
-  class Disabled < ApplicationService
+  class Enabled < ApplicationService
     attr_accessor :piece, :game
 
     def initialize(piece)

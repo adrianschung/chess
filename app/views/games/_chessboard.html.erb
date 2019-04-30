@@ -3,7 +3,7 @@
     <tr>
       <% row.each_with_index do |piece, x| %>
         <td data-row=<%= y %> data-column=<%= x %>
-          class=<%= set_class(piece) %> >
+          class="<%= set_class(piece) %>" >
             <% if !piece.nil? %>
               <%= image_tag piece.picture,
               class: 'piece',
