@@ -31,10 +31,13 @@ class GamesController < ApplicationController
       current_game.update(black_player: current_player, state: 1)
       PlayerMailer.game_joined(current_game).deliver_later
       current_game.add_pieces_to_board
-      ActionCable.server.broadcast("room_#{current_game.id}", view: ApplicationController.render(
-                                    partial: 'games/chessboard',
-                                    locals: { chess_board: board } )
-                            )
+      ActionCable.server.broadcast("room_#{current_game.id}",
+                                   view: ApplicationController.render(
+                                     partial: 'games/chessboard',
+                                     locals: { chess_board: board },
+                                     action: 'update' ),
+                                   state: current_game.state
+                                  )
       redirect_to game_path(current_game)
     else
       render :new, status: :unprocessable_entity
