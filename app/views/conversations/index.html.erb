@@ -3,7 +3,7 @@
     <div class='conversations_box  d-block p-4'>
       <h3>Conversations</h3>
       <div>
-        <div>
+        <div class='inner-box h-75'>
           <% @conversations.each do |conversation| %>
             <div class='convo-box'>
               <% if conversation.sender_id == current_player.id %>
