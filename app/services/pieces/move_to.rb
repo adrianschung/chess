@@ -12,7 +12,6 @@ module Pieces
       piece.increment!(:moves)
       return Pieces::Promote.call(piece) if piece.type == 'Pawn' &&
                                             (piece.row.zero? || piece.row == 7)
-      Games::UpdateState.call(game)
     end
 
     private
