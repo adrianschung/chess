@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_layout_variables
-    @my_games = current_player.games.where(state: [1, 2]) if current_player
+    @my_games = current_player.games.where(state: [0, 1, 2]) if current_player
   end
 
   protected
