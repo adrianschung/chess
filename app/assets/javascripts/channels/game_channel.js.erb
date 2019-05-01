@@ -1,4 +1,4 @@
-$(function() {
+$(document).on('turbolinks:load', function(){
   $('[data-channel-subscribe="game"]').each(function(index, element) {
     var $element = $(element),
       game_id = $element.data('game-id'),
