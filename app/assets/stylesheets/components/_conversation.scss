@@ -1,7 +1,7 @@
 #conversation_wrapper {
   width: 60%;
   height: 80%;
-  margin: 6rem auto;
+  margin: auto;
 
   .inner {
     height: 100%;
@@ -32,16 +32,12 @@
     -webkit-box-shadow: inset 0 0 10px #000000;
     box-shadow:         inset 0 0 10px #000000;
     height: 45%;
-    margin-bottom: 5%;
-    overflow: auto;
+    margin-top: 10%;
+    padding: 10%;
+    background-color: _palette(box-bg);
   }
 
-  .players_box{
-    -moz-box-shadow:    inset 0 0 10px #000000;
-    -webkit-box-shadow: inset 0 0 10px #000000;
-    box-shadow:         inset 0 0 10px #000000;
-    height: 45%;
-    margin-top: 5%;
-    overflow: auto;
+  .inner-box {
+    overflow: scroll;
   }
 }
