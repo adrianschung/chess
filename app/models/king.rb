@@ -50,7 +50,7 @@ class King < Piece
 
   def castle?(new_space)
     rook = find_rook(new_space)
-    return false unless new_space[:column] == (2 || 6) && moves.zero? && !rook.nil? && valid_rook?(rook)
+    return false unless (new_space[:column] == 2 || 6) && moves.zero? && !rook.nil? && valid_rook?(rook)
     true
   end
 
