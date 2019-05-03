@@ -10,10 +10,8 @@ class King < Piece
     transaction do
       if valid_move?(new_square)
         Pieces::MoveTo.call(self, new_square)
-        Games::UpdateState.call(game)
       elsif castle?(new_square)
         castle_move(new_square)
-        Games::UpdateState.call(game)
       end
       raise ActiveRecord::Rollback if game.check?(player)
     end
@@ -64,6 +62,7 @@ class King < Piece
       self.update_attributes(column: 6, moves: 1)
       rook.castle(new_space)
     end
+    Games::UpdateState.call(game)
   end
 
   # finds the correct rook that is castling with king
