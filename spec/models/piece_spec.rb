@@ -4,7 +4,7 @@ RSpec.describe Piece, type: :model do
   describe 'Player tries to move piece' do
     before(:each) do
       @player1 = FactoryBot.create(:player, playername: 'Wayne')
-      @game = FactoryBot.create(:game, white_player: @player1)
+      @game = FactoryBot.create(:game, white_player: @player1, state: "White's Turn")
       @piece = FactoryBot.create(:piece, game: @game, column: 2, row: 2, player: @player1)
     end
 
@@ -12,18 +12,21 @@ RSpec.describe Piece, type: :model do
       @piece.move_to!(row: 5, column: 4)
       expect(@piece.row).to eq(5)
       expect(@piece.column).to eq(4)
+      expect(@game.state).to eq("Black's Turn")
     end
 
     it "will not move if the piece's new column is out of bounds" do
       @piece.move_to!(row: 5, column: 9)
       expect(@piece.row).to eq(2)
       expect(@piece.column).to eq(2)
+      expect(@game.state).to eq("White's Turn")
     end
 
     it "will not move if the piece's new row is out of bounds" do
       @piece.move_to!(row: 9, column: 4)
       expect(@piece.row).to eq(2)
       expect(@piece.column).to eq(2)
+      expect(@game.state).to eq("White's Turn")
     end
 
     it 'Should detect vertical obstructions' do
@@ -55,7 +58,7 @@ RSpec.describe Piece, type: :model do
     before(:each) do
       @player1 = FactoryBot.create(:player, playername: 'Wayne')
       @player2 = FactoryBot.create(:player, playername: 'Ricky')
-      @game = FactoryBot.create(:game, white_player: @player1, black_player: @player2)
+      @game = FactoryBot.create(:game, white_player: @player1, black_player: @player2, state: "White's Turn")
     end
 
     it 'Should not move to new location if same colour piece is there' do
@@ -65,6 +68,7 @@ RSpec.describe Piece, type: :model do
       expect(piece_start.column).to eq(1)
       expect(piece_start.row).to eq(1)
       expect(piece_end.captured).to eq(false)
+      expect(@game.state).to eq("White's Turn")
     end
 
     it 'Should move to new location and capture opponents piece' do
@@ -75,6 +79,7 @@ RSpec.describe Piece, type: :model do
       expect(piece_start.row).to eq(2)
       piece_end.reload
       expect(piece_end.captured).to eq(true)
+      expect(@game.state).to eq("Black's Turn")
     end
 
     it 'Should move to new location if no other piece is there' do
@@ -82,14 +87,7 @@ RSpec.describe Piece, type: :model do
       piece_start.move_to!(row: 2, column: 2)
       expect(piece_start.column).to eq(2)
       expect(piece_start.row).to eq(2)
-    end
-
-    it 'Should not move to new location if own piece is there' do
-      piece_start = FactoryBot.create(:piece, game: @game, column: 1, row: 1, player: @player1)
-      FactoryBot.create(:piece, game: @game, column: 2, row: 2, player: @player1)
-      piece_start.move_to!(row: 2, column: 2)
-      expect(piece_start[:column]).to eq(1)
-      expect(piece_start[:row]).to eq(1)
+      expect(@game.state).to eq("Black's Turn")
     end
   end
 

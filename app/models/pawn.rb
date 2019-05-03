@@ -21,10 +21,8 @@ class Pawn < Piece
     transaction do
       if valid_move?(new_square)
         Pieces::MoveTo.call(self, new_square)
-        Games::UpdateState.call(game)
       elsif valid_en_passant_move?(new_square)
         Pieces::EnPassant.call(self, new_square)
-        Games::UpdateState.call(game)
       end
       raise ActiveRecord::Rollback if game.check?(player)
     end
