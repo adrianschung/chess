@@ -9,6 +9,8 @@ class PiecesController < ApplicationController
                                     partial: 'games/chessboard',
                                     locals: { chess_board: board } ),
                                  state: game.state
+                                 x: current_piece.column
+                                 y: current_piece.row
                                 )
     head :no_content
   end
