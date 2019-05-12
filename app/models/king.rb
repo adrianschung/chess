@@ -77,7 +77,7 @@ class King < Piece
   end
 
   def valid_rook?(rook)
-    return false unless rook || !Pieces::Obstruction.call(self, rook) || rook.moves.zero?
+    return false unless rook && !Pieces::Obstruction.call(self, rook) && rook.moves.zero?
     true
   end
 end

@@ -118,23 +118,22 @@ RSpec.describe King, type: :model do
 
     it 'is unable to if it has moved' do
       rook = FactoryBot.create(:rook, game: @game, player: @white_player, row: 0, column: 7)
-      @king.move_to!(row: 0, column: 3)
+      @king = FactoryBot.create(:king, game: @game, player: @white_player, row: 0, column: 4, moves: 1)
       @king.move_to!(row: 0, column: 6)
       rook.reload
-      expect(@king.column).to eq(3)
+      expect(@king.column).to eq(4)
       expect(@king.moves).to eq(1)
       expect(rook.column).to eq(7)
       expect(@game.state).to eq("White's Turn")
     end
 
     it 'is unable to if the rook has moved' do
-      rook = FactoryBot.create(:rook, game: @game, player: @white_player, row: 0, column: 7)
-      rook.move_to!(row: 0, column: 5)
+      rook = FactoryBot.create(:rook, game: @game, player: @white_player, row: 0, column: 7, moves: 1)
       @king.move_to!(row: 0, column: 6)
       rook.reload
       expect(@king.column).to eq(4)
       expect(@king.moves).to eq(0)
-      expect(rook.column).to eq(5)
+      expect(rook.column).to eq(7)
       expect(@game.state).to eq("White's Turn")
     end
   end
