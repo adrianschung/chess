@@ -23,7 +23,7 @@
         <% @players.each do |player| %>
           <% if player.id != current_player.id %>
             <div class='player_box m-1'>
-              <%= link_to player.playername, player_path(player) %> <%= link_to 'Message me!', conversations_path(sender_id: current_player.id, recipient_id: player.id), method: 'post'%>
+              <%= link_to player.playername, user_path(player) %> <%= link_to 'Message me!', conversations_path(sender_id: current_player.id, recipient_id: player.id), method: 'post'%>
             </div>
           <% end %>
         <% end %>

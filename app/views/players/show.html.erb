@@ -14,7 +14,7 @@
     <h3><span>Total games played:</span> <%= player_profile.total_games %></h3>
     <br />
     <% if current_player == player_profile %>
-      <%= link_to 'Edit Profile', edit_player_path(current_player) %>
+      <%= link_to 'Edit Profile', edit_user_path(current_player) %>
     <% end %>
     <% if player_profile.id != current_player.id %>
     <div class='item'>

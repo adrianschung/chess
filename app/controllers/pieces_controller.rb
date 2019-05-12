@@ -8,8 +8,8 @@ class PiecesController < ApplicationController
                                  view: ApplicationController.render(
                                     partial: 'games/chessboard',
                                     locals: { chess_board: board } ),
-                                 state: game.state
-                                 x: current_piece.column
+                                 state: game.state,
+                                 x: current_piece.column,
                                  y: current_piece.row
                                 )
     head :no_content

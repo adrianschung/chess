@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       put :forfeit
     end
   end
-  resources :players, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update]
   resources :pieces, only: :update
   resources :conversations do
     resources :messages

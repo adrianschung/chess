@@ -50,7 +50,7 @@ $(document).on('turbolinks:load', function(){
         received: function(data) {
           $('#state').text(data.state);
           updateView(data, setPieces);
-          highlightPiece(data.x, data.y);
+          
         },
       }
     );
