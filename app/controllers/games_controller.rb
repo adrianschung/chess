@@ -35,9 +35,9 @@ class GamesController < ApplicationController
                                    view: ApplicationController.render(
                                      partial: 'games/chessboard',
                                      locals: { chess_board: board },
-                                     action: 'update' ),
-                                   state: current_game.state
-                                  )
+                                     action: 'update'
+                                   ),
+                                   state: current_game.state)
       redirect_to game_path(current_game)
     else
       render :new, status: :unprocessable_entity
