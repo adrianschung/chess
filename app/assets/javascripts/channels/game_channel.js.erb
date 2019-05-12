@@ -31,8 +31,8 @@ $(document).on('turbolinks:load', function(){
     }
 
     function highlightPiece(column, row) {
-      $(`[data-column="${column}"][data-row="${row}"]`.addClass("highlighted");
-    }
+      $(`[class="piece"][data-column="${column}"][data-row="${row}"]`).addClass("highlighted");
+    };
 
     function updateView(data, callback) {
       $('#game-box').html(data.view);
@@ -50,7 +50,7 @@ $(document).on('turbolinks:load', function(){
         received: function(data) {
           $('#state').text(data.state);
           updateView(data, setPieces);
-          
+          highlightPiece(data.x, data.y);
         },
       }
     );
