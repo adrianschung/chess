@@ -57,8 +57,8 @@ class Game < ApplicationRecord
     king = pieces.where(player: player, type: 'King', captured: false).first
     return false if king.can_move?
     opponent_pieces = pieces.where.not(player: player, captured: true)
-    check_piece = nil
     check_piece = find_check(opponent_pieces, king)
+    return false unless check_piece
     return false if check_piece.can_obstruct? || check_piece.can_capture?
     true
   end
