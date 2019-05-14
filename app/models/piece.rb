@@ -4,9 +4,7 @@ class Piece < ApplicationRecord
 
   def move_to!(new_square)
     transaction do
-      if valid_move?(new_square)
-        Pieces::MoveTo.call(self, new_square)
-      end
+      Pieces::MoveTo.call(self, new_square) if valid_move?(new_square)
       raise ActiveRecord::Rollback if game.check?(player)
     end
   end

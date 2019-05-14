@@ -48,18 +48,19 @@ class King < Piece
 
   def castle?(new_space)
     rook = find_rook(new_space)
-    return false unless (new_space[:column] == 2 || 6) && moves.zero? && valid_rook?(rook)
+    return false unless (new_space[:column] == 2 || new_space[:column] == 6) &&
+                        moves.zero? && valid_rook?(rook)
     true
   end
 
   def castle_move(new_space)
     if new_space[:column] == 2
       rook = game.pieces.where(row: new_space[:row], column: 0, type: 'Rook', captured: false).first
-      self.update_attributes(column: 2, moves: 1)
+      update_attributes(column: 2, moves: 1)
       rook.castle(new_space)
     elsif new_space[:column] == 6
       rook = game.pieces.where(row: new_space[:row], column: 7, type: 'Rook', captured: false).first
-      self.update_attributes(column: 6, moves: 1)
+      update_attributes(column: 6, moves: 1)
       rook.castle(new_space)
     end
     Games::UpdateState.call(game)
