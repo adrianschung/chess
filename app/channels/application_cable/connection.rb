@@ -11,11 +11,8 @@ module ApplicationCable
     private
 
     def find_verified_player
-      if verified_player = Player.find_by(id: cookies.signed['player.id'])
-        verified_player
-      else
-        reject_unauthorized_connection
-      end
+      verified_player = Player.find_by(id: cookies.signed['player.id'])
+      reject_unauthorized_connection unless verified_player
     end
   end
 end
