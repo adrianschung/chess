@@ -44,7 +44,7 @@ class Player < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |player|
       player.email = auth.info.email
       player.password = Devise.friendly_token[0, 20]
-      player.playername = auth.info.name
+      player.playername = auth.info.first_name
     end
   end
 
