@@ -63,7 +63,7 @@ group :development do
 end
 
 gem 'bootstrap', '~> 4.3.1'
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 gem 'devise'
 gem 'fog-aws'
 gem 'jquery-ui-rails'
